@@ -16,7 +16,6 @@ script.on_init(function()
 
 	-- create a table to store building needed in control
 	if not global.lihop_buildings then global.lihop_buildings= {} end
-	if not global.lihop_buildings_version then global.lihop_buildings_version=1 end
 	
 
 end)

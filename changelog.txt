@@ -1,9 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 29. 08. 2024
+  Changes:
+    - Fixe some bugs
+
+---------------------------------------------------------------------------------------------------
 Version: 0.6.0
 Date: 27. 05. 2021
   Changes:
     - Fixe some bugs
-	- Add electrical boiler (not very efficient, but sometimes can help....)
+    - Add electrical boiler (not very efficient, but sometimes can help..)
 
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.0
