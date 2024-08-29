@@ -23,6 +23,11 @@ migrations.versions = {
           }
         end
       end
+      if tforce.technologies["lihop-infinity-stone"] then
+        local tech = tforce.technologies["lihop-infinity-stone"]
+        tech.researched=false
+        tech.researched=true
+      end
     end
   end
 }

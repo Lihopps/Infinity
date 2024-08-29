@@ -30,7 +30,7 @@ data:extend({
     stack_size = 50
   },
   {
-    type = "accumulator",
+    type = "electric-energy-interface",
     name = "lihop-teleporteur",
     icon = "__Infinity__/graphics/entities/teleporteur/teleporter-icon.png",
     icon_size = 64,
@@ -49,14 +49,17 @@ data:extend({
       { type = "fire",     percent = 75 },
       { type = "impact",   percent = 75 },
     },
-    energy_source = {
-      type = "electric",
-      buffer_capacity = "400MJ",
-      input_flow_limit = "20MW",
-      usage_priority = "secondary-input",
-      output_flow_limit = "0W",
-    },
-    picture =
+    energy_source =
+        {
+            type = "electric",
+            usage_priority = "secondary-input",
+            buffer_capacity = "400MJ",
+            input_flow_limit = "20MW",
+            emissions_per_minute = 4
+        },
+        energy_usage = "500kW",
+    continuous_animation = true,
+    animation =
     {
       layers =
       {
@@ -68,7 +71,7 @@ data:extend({
           frame_count = 32,
           line_length = 4,
           direction_count = 32,
-          animation_speed = 1,
+          animation_speed = 0.7,
           shift = util.by_pixel(0, -20),
           scale = 0.3
         },
@@ -80,7 +83,7 @@ data:extend({
           frame_count = 32,
           line_length = 4,
           direction_count = 32,
-          animation_speed = 1,
+          animation_speed = 0.7,
           draw_as_shadow = true,
           shift = util.by_pixel(30, -20),
           scale = 0.3
