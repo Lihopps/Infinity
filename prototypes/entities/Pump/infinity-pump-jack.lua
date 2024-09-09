@@ -254,7 +254,7 @@ data:extend(
         pipe_connections = {{ type="input", position = {0, -2} }},
     },
     energy_usage = "90kW",
-    mining_speed = 100,
+    mining_speed = lihop.settings.oreAmount / 2,
     resource_searching_radius = 0.49,
     vector_to_place_result = {0, 0},
     radius_visualisation_picture =
