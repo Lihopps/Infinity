@@ -5,21 +5,6 @@ function Set (list)
   return set
 end
 
-local function create_resistance(allow)
-    local resistances = {}
-    for k,v in pairs(data.raw["damage-type"]) do
-        if v.name ~= "lihop-crafter-"..allow then
-            local tmp = {
-                type = v.name,
-                percent = 100,
-                decrease = 10
-            }
-            table.insert(resistances,tmp)
-        end
-    end
-    return resistances
-end
-
 local function recipe_result(resource,input_fluid,output_fluid)
 	local res={}
 	local icon=nil

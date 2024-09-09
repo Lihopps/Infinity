@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 09. 09. 2024
+  Changes:
+    - Add some missing translation
+    - Adapte mining speed to amount setting (problem with planner mod like helmod or RateCalculator)
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 29. 08. 2024
   Changes:
