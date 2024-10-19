@@ -16,25 +16,37 @@ local function isAvailable(entity)
 	end
 end
 
-local function update_surface_name(refs,player)
+local function update_surface_name(refs, player, entity)
 	if not global.lihop_buildings[player.force.name] then return end
-	local index=1
-	for name,surf in pairs(global.lihop_buildings[player.force.name]) do
+	refs.frame_surface.clear()
+	surfaces = {}
+	for name, surf in pairs(global.lihop_buildings[player.force.name]) do
 		if surf["teleporter"] then
-			refs.surface_changer.add_item(name)
-			if name==player.surface.name then
-				refs.surface_changer.selected_index=index
-			end
-			index=index+1
+			table.insert(surfaces,
+				{
+					type = "button",
+					name = "button_tel_" .. name,
+					caption = name,
+					style = "inf_list_box_item",
+					actions = {
+						on_click = {
+							gui = "lihop_teleporter",
+							action = "select_surface",
+							name = name,
+							entity = { force = entity.force.name, unit_number = entity.unit_number, surface = entity.surface.name }
+						}
+					}
+				})
 		end
 	end
+	gui.build(refs.frame_surface, surfaces)
 end
 
 local function update_list_teleport(refs, entity, player, surface_name)
-	local list_teleport = refs.list_teleport
-	local index = 1
+	local list_teleport = refs.table_teleporter
 	local teleport = {}
 	list_teleport.clear()
+	refs.surface_name_label.caption=surface_name
 	if not global.lihop_buildings[player.force.name] then return end
 	if not global.lihop_buildings[player.force.name][surface_name] then return end
 	if global.lihop_buildings[player.force.name][surface_name]["teleporter"] then
@@ -43,28 +55,34 @@ local function update_list_teleport(refs, entity, player, surface_name)
 			-- on test si c'est pas lui meme
 			if entity.unit_number ~= teleporter.unit_number then
 				-- on test si il est alimenté
-				if isAvailable(teleporter) then
 					table.insert(teleport,
 						{
 							type = "frame",
 							style = "deep_frame_in_shallow_frame",
-							style_mods = { horizontally_stretchable = true },
+							direction="vertical",
+							--style_mods = { horizontally_stretchable = true },
 							{
-								type = "button",
-								caption = data.name,
-								style_mods = { horizontally_stretchable = true },
-								tooltip = { "gui.teleport_tip" },
-								actions = {
-									on_click = {
-										gui = "lihop_teleporter",
-										action = "teleportation",
-										fromentity = { force = entity.force.name, surface = entity.surface.name, number = entity.unit_number },
-										entity = { force = teleporter.force.name, surface = teleporter.surface.name, number = teleporter.unit_number }
-									},
-								},
+								type = "minimap",
+								position = teleporter.position,
+								surface_index = teleporter.surface.index,
+								zoom = 5
 							},
+							{
+								type="button",
+								caption=data.name,
+								enabled=isAvailable(teleporter),
+								style_mods = { horizontally_stretchable = true },
+								tooltip = { "gui.lihop-rename-tooltip" },
+								actions = {
+									on_click = { 
+										gui = "lihop_teleporter", 
+										action = "teleportation",
+										fromentity = { force = entity.force.name or entity.force, surface = entity.surface.name or entity.surface, number = entity.unit_number },
+										entity = { force = teleporter.force.name, surface = teleporter.surface.name, unit_number = teleporter.unit_number }
+									}
+								}
+							}
 						})
-				end
 			end
 		end
 	end
@@ -84,8 +102,10 @@ function teleporter.create_gui(entity, player)
 			direction = "vertical",
 			name = "lihop_tel_frame",
 			ref = { "lihop_tel_frame" },
+			auto_center = false,
+			style_mods = {minimal_width=500, height = 900 },
 			actions = {
-				on_closed = { gui = "lihop_teleporter", action = "close", entity = { force = entity.force.name, surface = entity.surface.name, number = entity.unit_number } },
+				on_closed = { gui = "lihop_teleporter", action = "close", entity = { force = entity.force.name, surface = entity.surface.name, unit_number = entity.unit_number } },
 			},
 			children = {
 				-- bar du haut
@@ -98,7 +118,6 @@ function teleporter.create_gui(entity, player)
 							type = "label",
 							style = "subheader_caption_label",
 							rich_text_setting = "enabled",
-							style_mods = { maximal_width = 370 },
 							caption = data.name,
 							ref = { "name_label" },
 						},
@@ -117,10 +136,10 @@ function teleporter.create_gui(entity, player)
 								on_confirmed = {
 									gui = "lihop_teleporter",
 									action = "rename",
-									entity = { force = entity.force.name, surface = entity.surface.name, number = entity.unit_number }
+									entity = { force = entity.force.name, surface = entity.surface.name, unit_number = entity.unit_number }
 								},
 								on_text_changed = {
-									gui = "lihop_teleporter", action = "update_name", entity = { force = entity.force.name, surface = entity.surface.name, number = entity.unit_number }
+									gui = "lihop_teleporter", action = "update_name", entity = { force = entity.force.name, surface = entity.surface.name, unit_number = entity.unit_number }
 								},
 							},
 						},
@@ -132,7 +151,7 @@ function teleporter.create_gui(entity, player)
 							ref = { "texticon_lihop_teleporter" },
 							visible = false,
 							actions = {
-								on_gui_elem_changed = { gui = "lihop_teleporter", action = "choose", entity = { force = entity.force.name, surface = entity.surface.name, number = entity.unit_number } },
+								on_gui_elem_changed = { gui = "lihop_teleporter", action = "choose", entity = { force = entity.force.name, surface = entity.surface.name, unit_number = entity.unit_number } },
 							},
 						},
 						{
@@ -141,7 +160,7 @@ function teleporter.create_gui(entity, player)
 							sprite = "utility/rename_icon_small_white",
 							tooltip = { "gui.lihop-rename-tooltip" },
 							actions = {
-								on_click = { gui = "lihop_teleporter", action = "rename", entity = { force = entity.force.name, surface = entity.surface.name, number = entity.unit_number } },
+								on_click = { gui = "lihop_teleporter", action = "rename", entity = { force = entity.force.name, surface = entity.surface.name, unit_number = entity.unit_number } },
 							},
 						},
 						{
@@ -159,7 +178,7 @@ function teleporter.create_gui(entity, player)
 							clicked_sprite = "utility/close_black",
 							tooltip = { "gui.close-instruction" },
 							actions = {
-								on_click = { gui = "lihop_teleporter", action = "close", entity = { force = entity.force.name, surface = entity.surface.name, number = entity.unit_number } },
+								on_click = { gui = "lihop_teleporter", action = "close", entity = { force = entity.force.name, surface = entity.surface.name, unit_number = entity.unit_number } },
 							},
 						},
 					},
@@ -168,6 +187,7 @@ function teleporter.create_gui(entity, player)
 				{
 					type = "frame",
 					style = "inside_shallow_frame",
+					style_mods = { vertically_stretchable = true },
 					direction = "vertical",
 					children =
 					{
@@ -180,38 +200,51 @@ function teleporter.create_gui(entity, player)
 						},
 						{
 							type = "frame",
-							style = "deep_frame_in_shallow_frame",
-							children = {
+							name = "fprinc",
+							direction = "horizontal",
+							style_mods = { vertically_stretchable = true,horizontally_squashable= true },
+							{
+								type = "frame",
+								style_mods = { vertically_stretchable = true,minimal_width=150 },
+								visible = player.force.technologies["lihop-infinity-teleportation"].researched,
 								{
-									type = "drop-down",
-									name = "surface",
-									ref={"surface_changer"},
-									visible=player.force.technologies["lihop-infinity-teleportation"].researched,
-									actions = {
-										on_selection_state_changed = { gui = "lihop_teleporter", action = "change_surface", entity = { force = entity.force.name, surface = entity.surface.name, unit_number = entity.unit_number } },
-									},
+									type="frame",
+									style_mods = { vertically_stretchable = true },
+									style="deep_frame_in_shallow_frame",
+									{
+										type = "scroll-pane",
+										style = "inf_list_box_scroll_pane",
+										style_mods = { vertically_stretchable = true, },
+										name = "frame_surface",
+										ref = { "frame_surface" },
+									}
 								},
 							},
-						},
-						{
-							type = "scroll-pane",
-							style = "scroll_pane",
-							children = {
+							{
+								type = "frame",
+								name = "frame_minimap",
+								style_mods = { horizontally_stretchable = true },
+								direction = "vertical",
 								{
-									type = "frame",
-									style = "frame",
-									direction = "vertical",
-									children = {
-										{
-											type = "table",
-											style = "slot_table",
-											column_count = 1,
-											ref = { "list_teleport" }
-										},
-									},
+									type = "label",
+									caption=player.surface.name,
+									ref={"surface_name_label"}
 								},
-							},
-						},
+								{
+									type = "scroll-pane",
+									horizontal_scroll_policy="never",
+									--style_mods = { horizontally_stretchable = true },
+									{
+										type = "table",
+										style = "inset_frame_container_table",
+										--style_mods = { horizontally_stretchable = true },
+										name = "table_teleporter",
+										ref = { "table_teleporter" },
+										column_count = 3
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -220,7 +253,7 @@ function teleporter.create_gui(entity, player)
 
 	refs.titlebar.drag_target = refs.lihop_tel_frame
 	refs.lihop_tel_frame.force_auto_center()
-	update_surface_name(refs,player)
+	update_surface_name(refs, player, entity)
 	update_list_teleport(refs, entity, player, player.surface.name)
 	refs.texticon_lihop_teleporter.elem_value = { type = "item", name = "lihop-false-item" }
 	player.opened = refs.lihop_tel_frame
@@ -241,14 +274,15 @@ function teleporter.handle_gui_action(msg, e)
 				player.opened = nil
 			end
 		else
-			if global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].refs[e.player_index] then
-				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].refs[e.player_index]
+			if global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index] then
+				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index]
 					.lihop_tel_frame.destroy()
-				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].refs[e.player_index] = nil
+				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index] = nil
 			end
 		end
 	elseif msg.action == "rename" then
-		local refs = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].refs[e.player_index]
+		local refs = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs
+			[e.player_index]
 		local textfield = refs.name_textfield
 		local texticon = refs.texticon_lihop_teleporter
 		local label = refs.name_label
@@ -257,15 +291,15 @@ function teleporter.handle_gui_action(msg, e)
 			texticon.visible = false
 			label.caption = textfield.text --global.teleporteur[msg.number].name
 			label.visible = true
-			global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].name = textfield.text
+			global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name = textfield.text
 			local mess = { action = "close" }
 			local ee = { player_index = e.player_index }
 
 			teleporter.handle_gui_action(mess, ee)
 			teleporter.create_gui(
-				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].ent, player)
+				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].ent, player)
 		else
-			textfield.text = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].name or
+			textfield.text = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name or
 				""
 			textfield.visible = true
 			texticon.visible = true
@@ -274,10 +308,10 @@ function teleporter.handle_gui_action(msg, e)
 			label.visible = false
 		end
 	elseif msg.action == "update_name" then
-		global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].name = e.text ~= "" and
+		global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name = e.text ~= "" and
 			e.text or nil
 	elseif msg.action == "choose" then
-		local refs = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].refs
+		local refs = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs
 			[e.player_index]
 		local textfield = refs.name_textfield
 		local texticon = refs.texticon_lihop_teleporter
@@ -286,19 +320,19 @@ function teleporter.handle_gui_action(msg, e)
 			texticon.elem_value = { type = "item", name = "lihop-false-item" }
 		end
 		textfield.focus()
-	elseif msg.action=="change_surface" then
-		local refs = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index]
-		local surface = refs.surface_changer.get_item(refs.surface_changer.selected_index)
-		
-		local ent={force={name=entity.force},surface={name=entity.surface},unit_number=entity.unit_number}
-		update_list_teleport(refs, ent, player, surface)
+	elseif msg.action == "select_surface" then
+		--game.print(msg.name)
+		update_list_teleport(
+			global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index],
+			entity, player, msg.name)
 	elseif msg.action == "teleportation" then
 		local mess = { action = "close", }
 		local ee = { player_index = e.player_index }
 		teleporter.handle_gui_action(mess, ee)
 
-		local fromentity = global.lihop_buildings[msg.fromentity.force][msg.fromentity.surface]["teleporter"][msg.fromentity.number].ent
-		local ent = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.number].ent
+		local fromentity = global.lihop_buildings[msg.fromentity.force][msg.fromentity.surface]["teleporter"]
+			[msg.fromentity.number].ent
+		local ent = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].ent
 
 		if isAvailable(ent) then
 			local area = fromentity.bounding_box
@@ -310,10 +344,10 @@ function teleporter.handle_gui_action(msg, e)
 					end
 				end
 			else
-				util.entity_flying_text(player, "gui.no_player", { r = 255 / 255, g = 0, b = 0 },fromentity.position)
+				player.create_local_flying_text{text={"gui.no_player"},position=fromentity.position,color= { r = 255 / 255, g = 0, b = 0 }}
 			end
 		else
-			util.entity_flying_text(player, "gui.not_enought_power", { r = 255 / 255, g = 0, b = 0 },fromentity.position)
+			player.create_local_flying_text{text={"gui.not_enought_power"},position=fromentity.position,color= { r = 255 / 255, g = 0, b = 0 }}
 		end
 		fromentity.energy = 0
 		ent.energy = 0

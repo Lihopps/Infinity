@@ -52,4 +52,5 @@ require("prototypes.ammo")
 require("prototypes.equipment")
 require("prototypes.technologies")
 
+require("prototypes.style")
 
