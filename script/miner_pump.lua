@@ -71,4 +71,32 @@ function lihop_inf_miner.definerecipefluid(ent,player)
 	end
 end
 
+function lihop_inf_miner.definerecipefluidfromtile(entity)
+	local surface=entity.surface
+	local data=helpers.table_to_json(surface.map_gen_settings)
+	helpers.write_file("surface.json",data)
+
+	local fluids={}
+	local map_gen_settings=surface.map_gen_settings
+	local tiles=map_gen_settings.autoplace_settings.tile.settings
+	for k,v in pairs(tiles) do
+		if prototypes.tile[k] then
+			local tile=prototypes.tile[k]
+			if tile.fluid then
+				table.insert(fluids,tile.fluid)
+			end
+		end
+	end
+	if #fluids >0 then
+		local i=math.random (#fluids)
+		local name="lihop-infinity-pump-".. fluids[i].name
+		try(function()
+			entity.set_recipe(name)
+		end, function(e)
+			game.print(fluids[i].name .." not supported")
+		end)
+	end
+
+
+end
 return lihop_inf_miner

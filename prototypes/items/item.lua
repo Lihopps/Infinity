@@ -71,8 +71,7 @@ data:extend(
       placed_as_equipment_result = "lihop-fusion-reactor-equipment",
       subgroup="equipment",
       order="a[energy-source]-c[infinity-fusion-reactor]",
-      default_request_amount = 1,
-      stack_size = 20,
+      stack_size = 5,
     },
   })
 ---- create false item for button

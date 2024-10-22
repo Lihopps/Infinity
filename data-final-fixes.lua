@@ -24,7 +24,7 @@ local function recipe_result(resource, input_fluid, output_fluid)
     end
     if (resource.minable.results) then
         res = resource.minable.results
-        recipe.localised_name=resource.name
+        recipe.localised_name = resource.name
         for k, v in pairs(res) do
             if (output_fluid) then
                 res[k].amount = lihop.settings.fluidAmount
@@ -48,13 +48,13 @@ local function recipe_result(resource, input_fluid, output_fluid)
                     icon = data.raw.item[resource.name].icon
                     iconsize = data.raw.item[resource.name].icon_size
                     order = data.raw.item[resource.name].order
-                    recipe.localised_name=resource.name
+                    recipe.localised_name = resource.name
                 else
                     subgroup = data.raw.resource[resource.name].subgroup
                     icon = data.raw.resource[resource.name].icon
                     iconsize = data.raw.resource[resource.name].icon_size
                     order = data.raw.resource[resource.name].order
-                    recipe.localised_name=resource.name
+                    recipe.localised_name = resource.name
                 end
             end
         end
@@ -67,13 +67,13 @@ local function recipe_result(resource, input_fluid, output_fluid)
                 icon = data.raw.fluid[resource.name].icon
                 iconsize = data.raw.fluid[resource.name].icon_size
                 order = data.raw.fluid[resource.name].order
-                recipe.localised_name=resource.name
+                recipe.localised_name = resource.name
             else
                 subgroup = data.raw.resource[resource.name].subgroup
                 icon = data.raw.resource[resource.name].icon
                 iconsize = data.raw.resource[resource.name].icon_size
                 order = data.raw.resource[resource.name].order
-                recipe.localised_name=resource.name
+                recipe.localised_name = resource.name
             end
         else
             res = { { type = "item", name = resource.minable.result, amount = lihop.settings.oreAmount } }
@@ -83,13 +83,13 @@ local function recipe_result(resource, input_fluid, output_fluid)
                 icon = data.raw.item[resource.name].icon
                 iconsize = data.raw.item[resource.name].icon_size
                 order = data.raw.item[resource.name].order
-                recipe.localised_name=resource.name
+                recipe.localised_name = resource.name
             else
                 subgroup = data.raw.resource[resource.name].subgroup
                 icon = data.raw.resource[resource.name].icon
                 iconsize = data.raw.resource[resource.name].icon_size
                 order = data.raw.resource[resource.name].order
-                recipe.localised_name=resource.name
+                recipe.localised_name = resource.name
             end
         end
     end
@@ -101,7 +101,7 @@ local function recipe_result(resource, input_fluid, output_fluid)
     if category then recipe["category"] = category end
     if subgroup then recipe["subgroup"] = subgroup end
     if order then recipe["order"] = order end
-    
+
     return recipe
 end
 
@@ -133,5 +133,26 @@ for k, v in pairs(data.raw.resource) do
                 recipe_result(data.raw.resource[k], false, true)
             })
         end
+    end
+end
+
+-------------------------------------------------------------------------------------------------------------------------
+------------------------------------------ Fluids Recipe From tile -------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+for k, v in pairs(data.raw.tile) do
+    if v.fluid then
+    data:extend(
+        {
+            {
+                type = "recipe",
+                name = "lihop-infinity-pump-"..v.fluid,
+                category = "lihop-excavate-fluid-tile",
+                enabled = true,
+                energy_required = 1,
+                ingredients = {},
+                results = { { type = "fluid", name = v.fluid, amount = 500 } }
+            },
+        }
+    )
     end
 end

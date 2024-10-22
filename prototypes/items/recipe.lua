@@ -111,7 +111,7 @@ data:extend(
     {
       type = "recipe",
       name = "lihop-infinity-stone",
-      energy_required = 120,
+      energy_required = 30,
       enabled = false,
       category = "lihop-concentrating",
       icon = "__Infinity__/graphics/items/infinity-stone.png",

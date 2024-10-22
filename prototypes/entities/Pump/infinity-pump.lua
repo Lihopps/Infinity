@@ -51,16 +51,6 @@ local layers =
 
 data:extend(
 {
-	{
-    type = "recipe",
-    name = "lihop-infinity-pump-water",
-	category = "lihop-excavate-fluid",
-    
-      enabled = false,
-      energy_required = 1,
-      ingredients ={},
-      results = {{type = "fluid", name = "water", amount = 500}}
-  },
   {
     type = "recipe",
     name = "lihop-infinity-pump",
@@ -98,8 +88,7 @@ data:extend(
     corpse = "medium-remnants",
     dying_explosion = "medium-explosion",
     alert_icon_shift = util.by_pixel(-3, -12),
-	recipe_locked=true,
-	fixed_recipe="lihop-infinity-pump-water",
+	  recipe_locked=true,
     resistances =
     {
       {
@@ -141,7 +130,7 @@ data:extend(
       fade_in_ticks = 4,
       fade_out_ticks = 20
     },
-    crafting_categories = {"lihop-excavate-fluid"},
+    crafting_categories = {"lihop-excavate-fluid-tile"},
     crafting_speed = 1,
     energy_source =
     {

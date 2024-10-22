@@ -41,6 +41,7 @@ data:extend({
     corpse = "medium-remnants",
     dying_explosion = "medium-explosion",
     damaged_trigger_effect = hit_effects.entity(),
+    collision_mask={layers={ item=true, object=true, water_tile=true}},
     collision_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
     selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
     resistances = {
@@ -106,28 +107,13 @@ data:extend({
   },
 })
 
-
-if mods["space-exploration"] then
-  data.raw["recipe"]["lihop-teleporteur"].ingredients =
-  {
-      { "radar",                          1 },
-      { "lihop-infinity-stone",           100 },
-      { "se-heat-shielding",    200 },
-      { "low-density-structure",          100 },
-
-    }
   data:extend({ 
      {
     type = "technology",
     name = "lihop-infinity-pre-teleportation",
     icon_size = 256,
     icon_mipmaps = 4,
-    icons =
-    {
-      {
-        icon = "__Infinity__/graphics/technologies/teleportation.png"
-      }
-    },
+    icon = "__Infinity__/graphics/technologies/teleportation.png",
     effects =
     {
       {
@@ -139,20 +125,20 @@ if mods["space-exploration"] then
     {
       count = 4000,
       ingredients =
-			  {
+			{
 				{"automation-science-pack", 1},
 				{"logistic-science-pack", 1},
 				{"chemical-science-pack", 1},
 				{"production-science-pack", 1},
 				{"utility-science-pack", 1},
+				{"military-science-pack",1},
 				{"space-science-pack", 1},
-				{"se-astronomic-science-pack-1", 1},
-				{"se-material-science-pack-1", 1},
-				{"se-biological-science-pack-1", 1},
-				{"se-energy-science-pack-1", 1},
-
-			  },
-      time = 60
+        {"metallurgic-science-pack",1},
+        {"electromagnetic-science-pack",1},
+        {"agricultural-science-pack",1},
+        {"cryogenic-science-pack",1},
+			},
+			time = 60
     },
     prerequisites = { "lihop-infinity-stone" }
   },
@@ -161,12 +147,7 @@ if mods["space-exploration"] then
     name = "lihop-infinity-teleportation",
     icon_size = 256,
     icon_mipmaps = 4,
-    icons =
-    {
-      {
-        icon = "__Infinity__/graphics/technologies/teleportation.png"
-      }
-    },
+    icon = "__Infinity__/graphics/technologies/teleportation.png",
     effects =
     {
       {
@@ -181,55 +162,20 @@ if mods["space-exploration"] then
       count = 4000,
       ingredients =
       {
-        { "automation-science-pack",      1 },
-        { "logistic-science-pack",        1 },
-        { "chemical-science-pack",        1 },
-        { "production-science-pack",      1 },
-        { "utility-science-pack",         1 },
-        { "space-science-pack",           1 },
-        { "se-astronomic-science-pack-4", 1 },
-        { "se-material-science-pack-4",   1 },
-        { "se-energy-science-pack-4",     1 },
-        { "se-deep-space-science-pack-4", 1 }
-
+       {"automation-science-pack", 1},
+				{"logistic-science-pack", 1},
+				{"chemical-science-pack", 1},
+				{"production-science-pack", 1},
+				{"utility-science-pack", 1},
+				{"military-science-pack",1},
+				{"space-science-pack", 1},
+        {"metallurgic-science-pack",1},
+        {"electromagnetic-science-pack",1},
+        {"agricultural-science-pack",1},
+        {"cryogenic-science-pack",1},
+        {"promethium-science-pack",1},
       },
       time = 60
     },
-    prerequisites = { "lihop-infinity-pre-teleportation","lihop-infinity-energy2", "se-teleportation" }
+    prerequisites = { "lihop-infinity-pre-teleportation","lihop-infinity-energy2" }
   } })
-else
-  data:extend({ {
-    type = "technology",
-    name = "lihop-infinity-teleportation",
-    icon_size = 256,
-    icon_mipmaps = 4,
-    icons =
-    {
-      {
-        icon = "__Infinity__/graphics/technologies/teleportation.png"
-      }
-    },
-    effects =
-    {
-      {
-        type = "unlock-recipe",
-        recipe = "lihop-teleporteur"
-      }
-    },
-    unit =
-    {
-      count = 4000,
-      ingredients =
-      {
-        { "automation-science-pack", 1 },
-        { "logistic-science-pack",   1 },
-        { "chemical-science-pack",   1 },
-        { "production-science-pack", 1 },
-        { "utility-science-pack",    1 },
-        { "space-science-pack",      1 }
-      },
-      time = 60
-    },
-    prerequisites = { "lihop-infinity-energy2" }
-  } })
-end

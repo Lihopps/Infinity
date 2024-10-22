@@ -2,7 +2,8 @@ data:extend({
 	{
     type = "technology",
     name = "lihop-infinity-stone",
-    icon_size = 256, icon_mipmaps = 4,
+    icon_size = 256,
+	icon_mipmaps = 4,
     icon = "__Infinity__/graphics/technologies/infinity-science.png",
     effects =
     {
@@ -36,12 +37,7 @@ data:extend({
 		type = "technology",
 		name= "lihop-infinity-miner",
 		icon_size = 256, icon_mipmaps = 4,
-		icons= 
-		{
-			{
-				icon="__Infinity__/graphics/technologies/mining.png"
-			}
-		},
+		icon="__Infinity__/graphics/technologies/mining.png",
 		effects =
 		{
 			{
@@ -63,18 +59,13 @@ data:extend({
 			},
 			time = 30
 		},
-		prerequisites = {"lihop-infinity-stone"}
+		prerequisites = {"lihop-infinity-stone","big-mining-drill"}
 	},
 	{
 		type = "technology",
 		name= "lihop-infinity-pump-jack",
 		icon_size = 256, icon_mipmaps = 4,
-		icons= 
-		{
-			{
-				icon="__Infinity__/graphics/technologies/pump.png"
-			}
-		},
+		icon="__Infinity__/graphics/technologies/pump.png",
 		effects =
 		{
 			{
@@ -100,18 +91,13 @@ data:extend({
 			},
 			time = 30
 		},
-		prerequisites = {"lihop-infinity-stone"}
+		prerequisites = {"lihop-infinity-stone","oil-gathering"}
 	},
 	{
 		type = "technology",
 		name= "lihop-infinity-energy2",
 		icon_size = 256, icon_mipmaps = 4,
-		icons= 
-		{
-			{
-				icon="__Infinity__/graphics/technologies/energy2.png"
-			}
-		},
+		icon="__Infinity__/graphics/technologies/energy2.png",
 		effects =
 		{
 			{
@@ -137,18 +123,13 @@ data:extend({
 			},
 			time = 30
 		},
-		prerequisites = {"lihop-infinity-stone"}
+		prerequisites = {"lihop-infinity-stone","fusion-reactor"}
 	},
 	{
 		type = "technology",
 		name= "lihop-infinity-energy",
 		icon_size = 256, icon_mipmaps = 4,
-		icons= 
-		{
-			{
-				icon="__Infinity__/graphics/technologies/energy.png"
-			}
-		},
+		icon="__Infinity__/graphics/technologies/energy.png",
 		effects =
 		{
 			{
@@ -188,12 +169,7 @@ data:extend({
 		type = "technology",
 		name= "lihop-infinity-weapon",
 		icon_size = 256, icon_mipmaps = 4,
-		icons= 
-		{
-			{
-				icon="__Infinity__/graphics/technologies/weapon.png"
-			}
-		},
+		icon="__Infinity__/graphics/technologies/weapon.png",
 		effects =
 		{
 			{
@@ -228,7 +204,7 @@ data:extend({
 			},
 			time = 30
 		},
-		prerequisites = {"lihop-infinity-stone"}
+		prerequisites = {"lihop-infinity-stone","uranium-ammo"}
 	}
 
 })
