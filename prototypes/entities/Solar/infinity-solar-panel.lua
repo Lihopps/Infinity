@@ -4,7 +4,7 @@ local sounds = require("__base__/prototypes/entity/sounds")
 if mods["space-exploration"] then
   prod= "2MW"
 else
-  prod="600KW"
+  prod="600kW"
 end
 
 data:extend({
@@ -26,13 +26,13 @@ data:extend({
     enabled = false,
     ingredients =
     {
-      {"solar-panel", 10},
-      {"lihop-infinity-stone", 10},
-      {"steel-plate", 100},
-      {"low-density-structure", 20}
+      { type="item",name="solar-panel", amount=10},
+      { type="item",name="lihop-infinity-stone", amount=10},
+      { type="item",name="steel-plate", amount=100},
+      { type="item",name="low-density-structure", amount=20}
     
     },
-    result = "lihop-infinity-solar-panel"
+    results = {{ type="item",name="lihop-infinity-solar-panel",amount=1}}
   },
   {
     type = "solar-panel",
@@ -123,14 +123,3 @@ data:extend({
 
 -- update Solar Panel
 data.raw["solar-panel"]["solar-panel"]["fast_replaceable_group"] = "solar-panel"
-
-if mods["space-exploration"] then
-  data.raw["recipe"]["lihop-infinity-solar-panel"].ingredients =
-  {
-    {"se-space-solar-panel-3", 2},
-    {"lihop-infinity-stone", 10},
-    {"steel-plate", 100},
-    {"se-nanomaterial", 20}
-  
-  }
-end

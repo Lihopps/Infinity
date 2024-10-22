@@ -1,3 +1,5 @@
+local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
+local item_tints = require("__base__.prototypes.item-tints")
 ------------------------------------------------------------------------
 --------------------------------------- ITEM ---------------------------
 ------------------------------------------------------------------------
@@ -16,7 +18,7 @@ data:extend(
       { size = 64, filename = "__Infinity__/graphics/items/raw-4.png", scale = 0.25, mipmap_count = 4 }
     },
       icon_size = 64,icon_mipmaps = 4,
-      stack_size = 1000
+      stack_size = 50
     },
     ---- Infinity stone
     {
@@ -69,8 +71,7 @@ data:extend(
       placed_as_equipment_result = "lihop-fusion-reactor-equipment",
       subgroup="equipment",
       order="a[energy-source]-c[infinity-fusion-reactor]",
-      default_request_amount = 1,
-      stack_size = 20,
+      stack_size = 5,
     },
   })
 ---- create false item for button
@@ -80,48 +81,24 @@ data:extend({
     name = "lihop-false-item",
     icon = "__Infinity__/graphics/items/lihop-false-item.png",
     icon_size = 64,
-    flags = { "hidden" ,"hide-from-bonus-gui"},
+    flags = {"hide-from-bonus-gui"},
     icon_mipmaps = 4,
     stack_size = 1
   }
 })
 
-------------------------------------------------------------------------
--------------------------- Mod Compatibilité ---------------------------
-------------------------------------------------------------------------
-
-
---- Infinity stone collect depend difficulty
-if mods["space-exploration"] then
-  data.raw["item"]["lihop-raw-infinity-stone"].stack_size=20
-else
-  data:extend(
-    {
-      {
-        type = "item",
-        name = "lihop-satellite-miner",
-        icon = "__Infinity__/graphics/items/satmining.png",
-        icon_size = 64,
-        icon_mipmaps = 4,
-        stack_size = 1,
-        rocket_launch_product = { "lihop-raw-infinity-stone", 1000 },
-        subgroup="space-related",
-        order="n[satellite-miner]",
-      },
-      {
-        type = "recipe",
-        name = "lihop-satellite-miner",
-        energy_required = 20,
-        enabled = false,
-        category = "advanced-crafting",
-        ingredients =
-        {
-          { "satellite",             1 },
-          { "productivity-module-3", 5 },
-          { "electric-mining-drill", 10 }
-        },
-        result = "lihop-satellite-miner",
-        result_count = 1
-      }
-    })
-end
+data:extend({
+  {
+    type = "item",
+    name = "infinity-asteroid-chunk",
+    icon = "__Infinity__/graphics/icons/infinity-asteroid-chunk.png",
+    subgroup = "space-material",
+    order = "a[metallic]-e[chunk]",
+    inventory_move_sound = space_age_item_sounds.rock_inventory_move,
+    pick_sound = space_age_item_sounds.rock_inventory_pickup,
+    drop_sound = space_age_item_sounds.rock_inventory_move,
+    stack_size = 1,
+    weight = 100 * kg,
+    random_tint_color = item_tints.iron_rust
+  },
+})

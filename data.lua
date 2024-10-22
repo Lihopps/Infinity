@@ -7,7 +7,7 @@ lihop.settings.oreAmount = settings.startup["lihop-infinity-oreamount"].value
 lihop.settings.fluidAmount = settings.startup["lihop-infinity-fluidamount"].value
 lihop.settings.forcetel = settings.startup["lihop-infinity-force-tel"].value
 
-lihop.minertype={"basic-solid"}
+lihop.minertype={"basic-solid","hard-solid"}
 lihop.pumptype={"basic-fluid"}
 
 
@@ -52,4 +52,5 @@ require("prototypes.ammo")
 require("prototypes.equipment")
 require("prototypes.technologies")
 
+require("prototypes.style")
 

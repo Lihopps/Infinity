@@ -13,6 +13,10 @@ data:extend(
   },
   {
     type = "recipe-category",
+    name = "lihop-excavate-fluid-tile"
+  },
+  {
+    type = "recipe-category",
     name = "lihop-boiler"
   },
   {

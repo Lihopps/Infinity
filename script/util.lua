@@ -1,9 +1,10 @@
 local util = {}
 
 ---- create flying text
-function util.entity_flying_text(entity, text, color, pos)
+--[[ function util.entity_flying_text(entity, text, color, pos)
   local posi = nil
   if pos then posi = pos else posi = entity.position end
+  draw_text instead
   entity.surface.create_entity({
     type = "flying-text",
     text_alignment="center",
@@ -12,7 +13,7 @@ function util.entity_flying_text(entity, text, color, pos)
     text = {text},
     color = color,
   })
-end
+end ]]
 
 --separate string
 function util.split (inputstr, sep)

@@ -9,6 +9,7 @@ data:extend(
     name = "lihop-infinity-rounds-magazine",
     icon = "__Infinity__/graphics/items/infinity-rounds-magazine.png",
     icon_size = 64, icon_mipmaps = 4,
+    ammo_category="bullet",
     ammo_type =
     {
       category = "bullet",
@@ -50,6 +51,7 @@ data:extend(
     name = "lihop-infinity-bomb",
     icon = "__Infinity__/graphics/items/infinity-bomb.png",
     icon_size = 64, icon_mipmaps = 4,
+    ammo_category="bullet",
     ammo_type =
     {
       range_modifier = 5,
@@ -81,6 +83,7 @@ data:extend(
     name = "lihop-infinity-cannon-shell",
     icon = "__Infinity__/graphics/items/infinity-cannon-shell.png",
     icon_size = 64, icon_mipmaps = 4,
+    ammo_category="bullet",
     ammo_type =
     {
       category = "cannon-shell",
@@ -114,6 +117,7 @@ data:extend(
     name = "lihop-explosive-infinity-cannon-shell",
     icon = "__Infinity__/graphics/items/explosive-infinity-cannon-shell.png",
     icon_size = 64, icon_mipmaps = 4,
+    ammo_category="bullet",
     ammo_type =
     {
       category = "cannon-shell",
