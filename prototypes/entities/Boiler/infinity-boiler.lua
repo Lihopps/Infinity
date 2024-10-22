@@ -1,85 +1,82 @@
-local hit_effects = require ("__base__/prototypes/entity/hit-effects")
+local hit_effects = require("__base__/prototypes/entity/hit-effects")
 local sounds = require("__base__/prototypes/entity/sounds")
 
-local layers=
-		{
-			{
-				priority = "high",
-				filename = "__Infinity__/graphics/entities/boiler/boiler.png",
-				line_length = 4,
-				width = 182,
-				height = 170,
-				frame_count = 32,
-				animation_speed = 1,
-				scale = 0.5,
-				shift = util.by_pixel(0, 0)
-			},
-			{
-					priority = "high",
-					filename = "__Infinity__/graphics/entities/boiler/boiler-shadow.png",
-					line_length = 4,
-					width = 236,
-					height = 123,
-					frame_count = 32,
-					animation_speed = 1,
-					draw_as_shadow = true,
-					scale = 0.6,
-					shift = util.by_pixel(10, 10)
-				}
-		}
+local layers =
+{
+  {
+    priority = "high",
+    filename = "__Infinity__/graphics/entities/boiler/boiler.png",
+    line_length = 4,
+    width = 182,
+    height = 170,
+    frame_count = 32,
+    animation_speed = 1,
+    scale = 0.5,
+    shift = util.by_pixel(0, 0)
+  },
+  {
+    priority = "high",
+    filename = "__Infinity__/graphics/entities/boiler/boiler-shadow.png",
+    line_length = 4,
+    width = 236,
+    height = 123,
+    frame_count = 32,
+    animation_speed = 1,
+    draw_as_shadow = true,
+    scale = 0.5,
+    shift = util.by_pixel(10, 10)
+  }
+}
 
 
 data:extend({
----- Create specificik steam recipe
-	{
+  ---- Create specificik steam recipe
+  {
     type = "recipe",
     name = "lihop-infinity-water-steam",
-	category = "lihop-boiler",
-    normal =
-    {
-      enabled = false,
-      energy_required = 1,
-      ingredients ={{type = "fluid", name = "water", amount = 100}},
-      results = {{type = "fluid", name = "steam", amount = 100,temperature = 500}}
-    }
+    category = "lihop-boiler",
+    ingredients = { { type = "fluid", name = "water", amount = 100 } },
+    results = { { type = "fluid", name = "steam", amount = 100, temperature = 500 } }
   },
-	{
+  {
     type = "recipe",
     name = "lihop-boiler",
     energy_required = 4,
     enabled = false,
-	category = "lihop-concentrating",
+    category = "lihop-concentrating",
     ingredients =
     {
-      {"boiler", 10},
-      {"lihop-infinity-stone", 5}
+      { type = "item", name = "boiler",               amount = 10 },
+      { type = "item", name = "lihop-infinity-stone", amount = 5 }
     },
-    result = "lihop-boiler"
+    results = { { type = "item", name = "lihop-boiler", amount = 1 } }
   },
-{
+  {
     type = "item",
     name = "lihop-boiler",
     icon = "__Infinity__/graphics/entities/boiler/boiler-icon.png",
-    icon_size = 64, icon_mipmaps = 4,
-    subgroup="energy",
-    order="b[steam-power]-a[infinity-boiler]",
-	  place_result = "lihop-boiler",
+    icon_size = 64,
+    icon_mipmaps = 4,
+    subgroup = "energy",
+    order = "b[steam-power]-a[infinity-boiler]",
+    place_result = "lihop-boiler",
     stack_size = 50
   },
   {
     type = "assembling-machine",
     name = "lihop-boiler",
     icon = "__Infinity__/graphics/entities/boiler/boiler-icon.png",
-    icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "player-creation"},
-    minable = {mining_time = 0.2, result = "lihop-boiler"},
+    icon_size = 64,
+    icon_mipmaps = 4,
+    flags = { "placeable-neutral", "player-creation" },
+    minable = { mining_time = 0.2, result = "lihop-boiler" },
     max_health = 200,
     corpse = "boiler-remnants",
     dying_explosion = "boiler-explosion",
     vehicle_impact_sound = sounds.generic_impact,
-	crafting_categories = {"lihop-boiler"},
+    crafting_categories = { "lihop-boiler" },
     crafting_speed = 1,
-	fixed_recipe = "lihop-infinity-water-steam",
+    fixed_recipe = "lihop-infinity-water-steam",
     show_recipe_icon = false,
     resistances =
     {
@@ -96,38 +93,36 @@ data:extend({
         percent = 30
       }
     },
-     collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
-    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
+    selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
     damaged_trigger_effect = hit_effects.entity(),
-    drawing_box = {{-1.5, -1.9}, {1.5, 1.5}},
+    drawing_box = { { -1.5, -1.9 }, { 1.5, 1.5 } },
+    fluid_boxes_off_when_no_fluid_recipe = true,
     fluid_boxes =
     {
       {
         production_type = "input",
         pipe_picture = assembler2pipepictures(),
         pipe_covers = pipecoverspictures(),
-        base_area = 10,
-        base_level = -1,
-        pipe_connections = {{ type="input", position = {0, -2} }},
+        volume = 1000,
+        pipe_connections = { { flow_direction = "input", direction = defines.direction.north, position = { 0, -1 } } },
         secondary_draw_orders = { north = -1 }
       },
       {
         production_type = "output",
         pipe_picture = assembler2pipepictures(),
         pipe_covers = pipecoverspictures(),
-        base_area = 10,
-        base_level = 1,
-        pipe_connections = {{ type="output", position = {0, 2} }},
+        volume = 1000,
+        pipe_connections = { { flow_direction = "output", direction = defines.direction.south, position = { 0, 1 } } },
         secondary_draw_orders = { north = -1 }
       },
-      off_when_no_fluid_recipe = true
     },
     energy_usage = "3MW",
     energy_source =
     {
       type = "electric",
       usage_priority = "secondary-input",
-      emissions_per_minute = 6
+      emissions_per_minute = { pollution = 6 }
     },
     working_sound =
     {
@@ -143,14 +138,13 @@ data:extend({
     },
     open_sound = sounds.machine_open,
     close_sound = sounds.machine_close,
-	animation =
-    {
-      layers =layers
+    graphics_set = {
+      animation =
+      {
+        layers = layers
+      },
     },
-	module_specification =
-    {
-      module_slots = 0
-    },
+    module_slots = 0,
     allowed_effects = {}
   }
 })

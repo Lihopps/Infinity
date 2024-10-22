@@ -29,7 +29,7 @@ function lihop_inf_miner.definerecipesolid(ent,player)
     local a=surf.find_entities_filtered{area = entity.bounding_box , type = "resource"}
 	local b={}
 	for i =1,#a do
-		if game.entity_prototypes["lihop-infinity-miner-fake"].resource_categories[game.entity_prototypes[a[i].name].resource_category] then
+		if prototypes.entity["lihop-infinity-miner-fake"].resource_categories[prototypes.entity[a[i].name].resource_category] then
 			b[#b+1]=a[i]
 		end
 	end
@@ -56,7 +56,7 @@ function lihop_inf_miner.definerecipefluid(ent,player)
     local a=surf.find_entities_filtered{area = entity.bounding_box , type = "resource"}
 	local b={}
 	for i =1,#a do
-		if game.entity_prototypes["lihop-infinity-pump-jack-fake"].resource_categories[game.entity_prototypes[a[i].name].resource_category] then
+		if prototypes.entity["lihop-infinity-pump-jack-fake"].resource_categories[prototypes.entity[a[i].name].resource_category] then
 			b[#b+1]=a[i]
 		end
 	end

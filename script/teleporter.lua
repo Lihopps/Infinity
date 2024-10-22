@@ -17,10 +17,10 @@ local function isAvailable(entity)
 end
 
 local function update_surface_name(refs, player, entity)
-	if not global.lihop_buildings[player.force.name] then return end
+	if not storage.lihop_buildings[player.force.name] then return end
 	refs.frame_surface.clear()
 	surfaces = {}
-	for name, surf in pairs(global.lihop_buildings[player.force.name]) do
+	for name, surf in pairs(storage.lihop_buildings[player.force.name]) do
 		if surf["teleporter"] then
 			table.insert(surfaces,
 				{
@@ -47,10 +47,10 @@ local function update_list_teleport(refs, entity, player, surface_name)
 	local teleport = {}
 	list_teleport.clear()
 	refs.surface_name_label.caption=surface_name
-	if not global.lihop_buildings[player.force.name] then return end
-	if not global.lihop_buildings[player.force.name][surface_name] then return end
-	if global.lihop_buildings[player.force.name][surface_name]["teleporter"] then
-		for number, data in pairs(global.lihop_buildings[player.force.name][surface_name]["teleporter"]) do
+	if not storage.lihop_buildings[player.force.name] then return end
+	if not storage.lihop_buildings[player.force.name][surface_name] then return end
+	if storage.lihop_buildings[player.force.name][surface_name]["teleporter"] then
+		for number, data in pairs(storage.lihop_buildings[player.force.name][surface_name]["teleporter"]) do
 			local teleporter = data.ent
 			-- on test si c'est pas lui meme
 			if entity.unit_number ~= teleporter.unit_number then
@@ -95,7 +95,7 @@ end
 
 
 function teleporter.create_gui(entity, player)
-	local data = global.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"][entity.unit_number]
+	local data = storage.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"][entity.unit_number]
 	local refs = gui.build(player.gui.screen, {
 		{
 			type = "frame",
@@ -257,7 +257,7 @@ function teleporter.create_gui(entity, player)
 	update_list_teleport(refs, entity, player, player.surface.name)
 	refs.texticon_lihop_teleporter.elem_value = { type = "item", name = "lihop-false-item" }
 	player.opened = refs.lihop_tel_frame
-	global.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"][entity.unit_number].refs[player.index] =
+	storage.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"][entity.unit_number].refs[player.index] =
 		refs
 end
 
@@ -274,14 +274,14 @@ function teleporter.handle_gui_action(msg, e)
 				player.opened = nil
 			end
 		else
-			if global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index] then
-				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index]
+			if storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index] then
+				storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index]
 					.lihop_tel_frame.destroy()
-				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index] = nil
+				storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index] = nil
 			end
 		end
 	elseif msg.action == "rename" then
-		local refs = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs
+		local refs = storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs
 			[e.player_index]
 		local textfield = refs.name_textfield
 		local texticon = refs.texticon_lihop_teleporter
@@ -289,17 +289,17 @@ function teleporter.handle_gui_action(msg, e)
 		if textfield.visible then
 			textfield.visible = false
 			texticon.visible = false
-			label.caption = textfield.text --global.teleporteur[msg.number].name
+			label.caption = textfield.text --storage.teleporteur[msg.number].name
 			label.visible = true
-			global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name = textfield.text
+			storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name = textfield.text
 			local mess = { action = "close" }
 			local ee = { player_index = e.player_index }
 
 			teleporter.handle_gui_action(mess, ee)
 			teleporter.create_gui(
-				global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].ent, player)
+				storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].ent, player)
 		else
-			textfield.text = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name or
+			textfield.text = storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name or
 				""
 			textfield.visible = true
 			texticon.visible = true
@@ -308,10 +308,10 @@ function teleporter.handle_gui_action(msg, e)
 			label.visible = false
 		end
 	elseif msg.action == "update_name" then
-		global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name = e.text ~= "" and
+		storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].name = e.text ~= "" and
 			e.text or nil
 	elseif msg.action == "choose" then
-		local refs = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs
+		local refs = storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs
 			[e.player_index]
 		local textfield = refs.name_textfield
 		local texticon = refs.texticon_lihop_teleporter
@@ -323,16 +323,16 @@ function teleporter.handle_gui_action(msg, e)
 	elseif msg.action == "select_surface" then
 		--game.print(msg.name)
 		update_list_teleport(
-			global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index],
+			storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].refs[e.player_index],
 			entity, player, msg.name)
 	elseif msg.action == "teleportation" then
 		local mess = { action = "close", }
 		local ee = { player_index = e.player_index }
 		teleporter.handle_gui_action(mess, ee)
 
-		local fromentity = global.lihop_buildings[msg.fromentity.force][msg.fromentity.surface]["teleporter"]
+		local fromentity = storage.lihop_buildings[msg.fromentity.force][msg.fromentity.surface]["teleporter"]
 			[msg.fromentity.number].ent
-		local ent = global.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].ent
+		local ent = storage.lihop_buildings[entity.force][entity.surface]["teleporter"][entity.unit_number].ent
 
 		if isAvailable(ent) then
 			local area = fromentity.bounding_box

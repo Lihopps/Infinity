@@ -15,14 +15,14 @@ script.on_init(function()
 	-- Initialize libraries
 
 	-- create a table to store building needed in control
-	if not global.lihop_buildings then global.lihop_buildings= {} end
+	if not storage.lihop_buildings then storage.lihop_buildings= {} end
 	
 
 end)
 
 
 script.on_configuration_changed(function(e)
-	if not global.lihop_buildings then global.lihop_buildings = {} end
+	if not storage.lihop_buildings then storage.lihop_buildings = {} end
 	migration.on_config_changed(e, migrations.versions)
 end)
 
@@ -34,10 +34,10 @@ script.on_event({
 	defines.events.on_surface_cleared,
 	defines.events.on_surface_deleted,
 }, function(e)
-	for forcename,datforce in pairs(global.lihop_buildings) do
-		for surfname,datsurf in pairs(global.lihop_buildings[forcename]) do
+	for forcename,datforce in pairs(storage.lihop_buildings) do
+		for surfname,datsurf in pairs(storage.lihop_buildings[forcename]) do
 			if game.surfaces[surfname].index==e.surface_index then
-				global.lihop_buildings[forcename][surfname]=nil
+				storage.lihop_buildings[forcename][surfname]=nil
 			end
 		end
 	end
@@ -46,9 +46,9 @@ end)
 script.on_event({
 	defines.events.on_surface_renamed,
 }, function(e)
-	for forcename,datforce in pairs(global.lihop_buildings) do
-		global.lihop_buildings[forcename][e.new_name]=global.lihop_buildings[forcename][e.old_name]
-		global.lihop_buildings[forcename][e.old_name]=nil
+	for forcename,datforce in pairs(storage.lihop_buildings) do
+		storage.lihop_buildings[forcename][e.new_name]=storage.lihop_buildings[forcename][e.old_name]
+		storage.lihop_buildings[forcename][e.old_name]=nil
 	end
 end)
 
@@ -81,10 +81,10 @@ script.on_event({
 	elseif entity.name == "lihop-infinity-pump-jack" or entity.name == "lihop-infinity-pump-jack-fake" then
 		lihop_inf_miner.definerecipefluid(entity, constructeur)
 	elseif entity.name == "lihop-teleporteur" then
-		if not global.lihop_buildings[entity.force.name] then global.lihop_buildings[entity.force.name] = {} end
-		if not global.lihop_buildings[entity.force.name][entity.surface.name] then global.lihop_buildings[entity.force.name][entity.surface.name] = {} end
-        if not global.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"] then global.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"] = {} end
-		global.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"][entity.unit_number] = {
+		if not storage.lihop_buildings[entity.force.name] then storage.lihop_buildings[entity.force.name] = {} end
+		if not storage.lihop_buildings[entity.force.name][entity.surface.name] then storage.lihop_buildings[entity.force.name][entity.surface.name] = {} end
+        if not storage.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"] then storage.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"] = {} end
+		storage.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"][entity.unit_number] = {
             ent = entity,
             name = game.backer_names[math.random(#game.backer_names)],
             refs = {}
@@ -106,7 +106,7 @@ script.on_event({
 		return
 	end
 	if entity.name == "lihop-teleporteur" then
-		global.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"][entity.unit_number] = nil
+		storage.lihop_buildings[entity.force.name][entity.surface.name]["teleporter"][entity.unit_number] = nil
 	end
 end)
 
@@ -115,50 +115,50 @@ end)
 --------------------------------------- Gestion des Gui ------------------------------------------------
 --------------------------------------------------------------------------------------------------------
 
-local function handle_gui_event(e)
-	local msg = gui.read_action(e)
-	if msg then
-		if msg.gui == "lihop_teleporter" then
-			lihop_teleporter.handle_gui_action(msg, e)
-		end
-		return true
-	end
-	return false
-end
+-- local function handle_gui_event(e)
+-- 	local msg = gui.read_action(e)
+-- 	if msg then
+-- 		if msg.gui == "lihop_teleporter" then
+-- 			lihop_teleporter.handle_gui_action(msg, e)
+-- 		end
+-- 		return true
+-- 	end
+-- 	return false
+-- end
 
-gui.hook_events(handle_gui_event)
+-- gui.hook_events(handle_gui_event)
 
-script.on_event(defines.events.on_gui_opened, function(e)
-	if not handle_gui_event(e) then
-		local entity = e.entity
-		local player = game.get_player(e.player_index)
-		if not player then
-			return
-		end
-		if entity and entity.valid then
-			local name = entity.name
-			if name == "lihop-teleporteur" then
-				lihop_teleporter.create_gui(entity, player)
-			end
-		end
-	end
-end)
+-- script.on_event(defines.events.on_gui_opened, function(e)
+-- 	if not handle_gui_event(e) then
+-- 		local entity = e.entity
+-- 		local player = game.get_player(e.player_index)
+-- 		if not player then
+-- 			return
+-- 		end
+-- 		if entity and entity.valid then
+-- 			local name = entity.name
+-- 			if name == "lihop-teleporteur" then
+-- 				lihop_teleporter.create_gui(entity, player)
+-- 			end
+-- 		end
+-- 	end
+-- end)
 
-script.on_event(defines.events.on_gui_elem_changed, function(e)
-	local player = game.get_player(e.player_index)
-	if not player then return end
-	if not player.opened then return end
-	if player.opened.name == "lihop_tel_frame" then
-		local refs = player.opened
-		if not refs then return end
-		local texticon_lihop_teleporter = refs.children[1].children[3]
-		local ee = { player_index = e.player_index }
-		local ent =util.split(texticon_lihop_teleporter.name,"/-")
-		local tmp={ force = ent[1], surface = ent[2], number = tonumber(ent[3]) }
-		local msg = { action = "choose", entity=tmp }
-		lihop_teleporter.handle_gui_action(msg, ee)
-	end
-end)
+-- script.on_event(defines.events.on_gui_elem_changed, function(e)
+-- 	local player = game.get_player(e.player_index)
+-- 	if not player then return end
+-- 	if not player.opened then return end
+-- 	if player.opened.name == "lihop_tel_frame" then
+-- 		local refs = player.opened
+-- 		if not refs then return end
+-- 		local texticon_lihop_teleporter = refs.children[1].children[3]
+-- 		local ee = { player_index = e.player_index }
+-- 		local ent =util.split(texticon_lihop_teleporter.name,"/-")
+-- 		local tmp={ force = ent[1], surface = ent[2], number = tonumber(ent[3]) }
+-- 		local msg = { action = "choose", entity=tmp }
+-- 		lihop_teleporter.handle_gui_action(msg, ee)
+-- 	end
+-- end)
 
 --------------------------------------------------------------------------------------------------------
 ------------------------------------------ PLAYER ------------------------------------------------------

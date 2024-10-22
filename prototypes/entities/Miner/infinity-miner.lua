@@ -60,13 +60,13 @@ data:extend(
       energy_required = 2,
       ingredients =
       {
-        { "electric-mining-drill", 10 },
-        { "lihop-infinity-stone",  10 },
-        { "steel-plate",           100 },
-        { "low-density-structure", 20 }
+        {  type="item",name="electric-mining-drill", amount=10 },
+        {  type="item",name="lihop-infinity-stone", amount= 10 },
+        {  type="item",name="steel-plate",         amount=  100 },
+        {  type="item",name="low-density-structure",amount= 20 }
 
       },
-      result = "lihop-infinity-miner"
+      results = {{ type="item",name="lihop-infinity-miner",amount=1}}
     },
     {
       type = "item",
@@ -102,35 +102,34 @@ data:extend(
           percent = 70
         }
       },
+      fluid_boxes_off_when_no_fluid_recipe = true,
       fluid_boxes =
       {
         {
           production_type = "input",
           pipe_picture = assembler2pipepictures(),
           pipe_covers = pipecoverspictures(),
-          base_area = 10,
-          base_level = -1,
-          pipe_connections = { { type = "input", position = { 0, -2 } } },
+          volume=1000,
+          pipe_connections = { { flow_direction="input", direction = defines.direction.north, position = { 0, -1. } } },
           secondary_draw_orders = { north = -1 }
         },
         {
           production_type = "output",
           pipe_picture = assembler2pipepictures(),
           pipe_covers = pipecoverspictures(),
-          base_area = 10,
-          base_level = 1,
-          pipe_connections = { { type = "output", position = { 0, 2 } } },
+          volume=1000,
+          pipe_connections = { { flow_direction="output", direction = defines.direction.south, position = { 0, 1. } } },
           secondary_draw_orders = { north = -1 }
         },
-        off_when_no_fluid_recipe = true
+        
       },
       collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
       selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
       damaged_trigger_effect = hit_effects.entity(),
-      animation =
+      graphics_set={animation =
       {
         layers = layers
-      },
+      }},
       open_sound = sounds.machine_open,
       close_sound = sounds.machine_close,
       vehicle_impact_sound = sounds.generic_impact,
@@ -153,7 +152,7 @@ data:extend(
       {
         type = "electric",
         usage_priority = "secondary-input",
-        emissions_per_minute = 12
+        emissions_per_minute = {pollution=12}
       },
       energy_usage = "200kW",
       module_specification =
@@ -180,47 +179,28 @@ data:extend(
       selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
       --damaged_trigger_effect = hit_effects.entity(),
       mining_speed = lihop.settings.oreAmount / 2,
-      active = false,
       vector_to_place_result = { 0, 0 },
       input_fluid_box =
       {
         production_type = "input-output",
         pipe_picture = assembler2pipepictures(),
         pipe_covers = pipecoverspictures(),
-        base_area = 1,
-        height = 2,
-        base_level = -1,
+        volume=1000,
         pipe_connections =
         {
-          { position = { 0, -2 } }
+          { flow_direction="input-output", direction = defines.direction.north, position = { 0, -1.199 } }
         }
-      },
-      working_sound =
-      {
-        sound =
-        {
-          {
-            filename = "__base__/sound/burner-mining-drill.ogg",
-            volume = 0.6
-          },
-          {
-            filename = "__base__/sound/burner-mining-drill-1.ogg",
-            volume = 0.6
-          }
-        },
-        --max_sounds_per_type = 3,
-        fade_in_ticks = 4,
-        fade_out_ticks = 20
       },
       allowed_effects = {},
       energy_source =
       {
         type = "electric",
         usage_priority = "secondary-input",
-        emissions_per_minute = 12
+        emissions_per_minute = {pollution=12}
       },
       energy_usage = "200kW",
-      animations =
+      graphics_set={
+      animation =
       {
         north =
         {
@@ -238,19 +218,11 @@ data:extend(
         {
           layers = layers
         }
-      },
+      }},
       monitor_visualization_tint = { r = 78, g = 173, b = 255 },
-      resource_searching_radius = 1.2
+      resource_searching_radius = 1.2,
+      resource_drain_rate_percent=1
     }
   })
 
-if mods["space-exploration"] then
-  data.raw["recipe"]["lihop-infinity-miner"].ingredients =
-  {
-    { "se-heat-shielding",     100 },
-    { "electric-mining-drill", 20 },
-    { "low-density-structure", 20 },
-    { "se-heavy-girder",       5 },
-    { "lihop-infinity-stone",  5 }
-  }
-end
+

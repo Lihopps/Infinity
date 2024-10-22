@@ -34,11 +34,11 @@ data:extend(
       energy_required = 90,
       enabled = false,
       category = "lihop-concentrating",
-      ingredients = { { "nuclear-fuel", 1 }, { "lihop-infinity-stone", 2 } },
+      ingredients = { { type = "item", name = "nuclear-fuel", amount = 1 }, { type = "item", name = "lihop-infinity-stone", amount = 2 } },
       icon = "__Infinity__/graphics/items/infinity-fuel.png",
       icon_size = 64,
       icon_mipmaps = 4,
-      result = "lihop-infinity-fuel"
+      results = { { type = "item", name = "lihop-infinity-fuel", amount = 1 } }
     },
 
     ---- Fusion Reactor
@@ -50,11 +50,11 @@ data:extend(
       category = "lihop-concentrating",
       ingredients =
       {
-        { "fusion-reactor-equipment", 4 },
-        { "lihop-infinity-stone",     25 }
+        { type = "item", name = "fusion-reactor-equipment", amount = 4 },
+        { type = "item", name = "lihop-infinity-stone", amount = 25 }
       },
-      result = "lihop-fusion-reactor-equipment",
-      result_count = 1
+      results = { { type = "item", name = "lihop-fusion-reactor-equipment", amount = 1 } }
+
     },
     {
       type = "recipe",
@@ -64,11 +64,10 @@ data:extend(
       category = "lihop-concentrating",
       ingredients =
       {
-        { "uranium-rounds-magazine", 5 },
-        { "lihop-infinity-stone",    1 }
+        { type = "item", name = "uranium-rounds-magazine", amount = 5 },
+        { type = "item", name = "lihop-infinity-stone", amount = 1 }
       },
-      result = "lihop-infinity-rounds-magazine",
-      result_count = 3
+      results = { { type = "item", name = "lihop-infinity-rounds-magazine", amount = 1 } }
     },
     {
       type = "recipe",
@@ -78,10 +77,10 @@ data:extend(
       energy_required = 50,
       ingredients =
       {
-        { "atomic-bomb",          1 },
-        { "lihop-infinity-stone", 30 }
+        { type = "item", name = "atomic-bomb",       amount = 1 },
+        { type = "item", name = "lihop-infinity-stone", amount = 30 }
       },
-      result = "lihop-infinity-bomb"
+      results = { { type = "item", name = "lihop-infinity-bomb", amount = 1 } }
     },
     {
       type = "recipe",
@@ -91,10 +90,10 @@ data:extend(
       energy_required = 12,
       ingredients =
       {
-        { "uranium-cannon-shell", 1 },
-        { "lihop-infinity-stone", 1 }
+        { type = "item", name = "uranium-cannon-shell", amount = 1 },
+        { type = "item", name = "lihop-infinity-stone", amount = 1 }
       },
-      result = "lihop-infinity-cannon-shell"
+      results = { { type = "item", name = "lihop-infinity-cannon-shell", amount = 1 } }
     },
     {
       type = "recipe",
@@ -104,77 +103,11 @@ data:extend(
       energy_required = 12,
       ingredients =
       {
-        { "explosive-uranium-cannon-shell", 1 },
-        { "lihop-infinity-stone",           1 }
+        { type = "item", name = "explosive-uranium-cannon-shell", amount = 1 },
+        { type = "item", name = "lihop-infinity-stone",       amount = 1 }
       },
-      result = "lihop-explosive-infinity-cannon-shell"
+      results = { { type = "item", name = "lihop-explosive-infinity-cannon-shell", amount = 1 } }
     },
-  })
-
-
-if mods["space-exploration"] then
-  --plus tard
-  data:extend({
-    ---- lihop-infinity-stone
-    {
-      type = "recipe",
-      name = "lihop-raw-infinity-stone",
-      energy_required = 60,
-      enabled = false,
-      category = "centrifuging",
-      subgroup = "raw-resource",
-      crafting_machine_tint =
-    {
-      primary = {r = 1.000, g = 0, b = 0, a = 1.000}, 
-      secondary = {r = 1.000, g = 0, b = 0, a = 1.000},
-      tertiary ={r = 1.000, g = 0, b = 0, a = 1.000},
-      quaternary = {r = 1.000, g = 0, b = 0, a = 1.000},
-    },
-      ingredients =
-      {
-        { type = "item", name = "uranium-ore",      amount = 10 },
-        { type = "item", name = "se-vulcanite",     amount = 10 },
-        { type = "item", name = "se-cryonite",      amount = 10 },
-        { type = "item", name = "se-beryllium-ore", amount = 10 },
-        { type = "item", name = "se-holmium-ore",   amount = 10 },
-        { type = "item", name = "se-iridium-ore",   amount = 10 },
-        { type = "item", name = "se-vitamelange",   amount = 10 },
-      },
-      results =
-      {
-        { type = "item", name = "lihop-raw-infinity-stone", amount = 1 },
-      },
-    },
-
-    ---- lihop-infinity-stone
-    {
-      type = "recipe",
-      name = "lihop-infinity-stone",
-      energy_required = 120,
-      enabled = false,
-      category = "lihop-concentrating",
-      icon = "__Infinity__/graphics/items/infinity-stone.png",
-      icon_size = 64,
-      icon_mipmaps = 4,
-      subgroup = "raw-resource",
-      ingredients =
-      {
-        { type = "item", name = "lihop-raw-infinity-stone", amount = 10 },
-        { type = "item", name = "uranium-235",              amount = 10 },
-        { type = "item", name = "se-vitamelange-nugget",     amount = 40 },
-      },
-      results =
-      {
-        { type = "item", name = "lihop-infinity-stone", amount = 1 },
-        { type = "item", name = "uranium-235", amount = 9 },
-        { type = "item", name = "se-vitamelange-nugget", amount_min = 15,amount_max =30,},
-        { type = "item", name = "coal", amount = 1},
-      },
-    },
-  })
-else
-  data:extend({
-    ---- lihop-infinity-stone
     {
       type = "recipe",
       name = "lihop-infinity-stone",
@@ -196,5 +129,25 @@ else
         { type = "item", name = "uranium-235",          amount = 9 },
       },
     },
+     {
+    type = "recipe",
+    name = "infinity-asteroid-crushing",
+    icon = "__space-age__/graphics/icons/metallic-asteroid-crushing.png",
+    category = "crushing",
+    subgroup="space-crushing",
+    order = "b-a",
+    auto_recycle = false,
+    enabled = false,
+    ingredients =
+    {
+      {type = "item", name = "infinity-asteroid-chunk", amount = 1},
+    },
+    energy_required = 2,
+    results =
+    {
+      {type = "item", name = "lihop-raw-infinity-stone", amount = 1,probability=0.5},
+    },
+    allow_productivity = true,
+    allow_decomposition = false
+  },
   })
-end

@@ -10,13 +10,13 @@ data:extend({
     enabled = false,
     ingredients =
     {
-      { "radar",                          1 },
-      { "lihop-infinity-stone",           100 },
-      { "lihop-fusion-reactor-equipment", 4 },
-      { "low-density-structure",          100 },
+      { type="item",name="radar",amount=1 },
+      { type="item",name="lihop-infinity-stone",amount=100 },
+      { type="item",name="lihop-fusion-reactor-equipment", amount=4 },
+      { type="item",name="low-density-structure",amount= 100 },
 
     },
-    result = "lihop-teleporteur"
+    results = {{type="item",name="lihop-teleporteur",amount=1}}
   },
   {
     type = "item",
@@ -43,7 +43,6 @@ data:extend({
     damaged_trigger_effect = hit_effects.entity(),
     collision_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
     selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
-    collision_mask = { "item-layer", "object-layer", "water-tile" },
     resistances = {
       { type = "physical", percent = 75 },
       { type = "fire",     percent = 75 },
@@ -55,7 +54,7 @@ data:extend({
             usage_priority = "secondary-input",
             buffer_capacity = "400MJ",
             input_flow_limit = "20MW",
-            emissions_per_minute = 4
+            emissions_per_minute = {pollution=4}
         },
         energy_usage = "500kW",
     continuous_animation = true,

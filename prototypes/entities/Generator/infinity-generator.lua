@@ -62,14 +62,14 @@ data:extend(
       energy_required = 180,
       ingredients =
       {
-        { "lihop-infinity-stone", 100 },
-        { "nuclear-reactor",      4 },
-        { "steam-turbine",        50 },
-        { "steel-plate",        1000 },
-        { "low-density-structure",        100 },
+        {  type="item",name="lihop-infinity-stone", amount=100 },
+        {  type="item",name="nuclear-reactor",    amount=  4 },
+        {  type="item",name="steam-turbine",      amount=  50 },
+        {  type="item",name="steel-plate",       amount= 1000 },
+        {  type="item",name="low-density-structure",    amount=    100 },
 
       },
-      result = "lihop-infinity-generator"
+      results ={ { type="item",name="lihop-infinity-generator",amount=1}}
     },
     {
       type = "item",
@@ -107,10 +107,11 @@ data:extend(
       },
       burner =
       {
-        fuel_category = "lihop-solid-fuel",
+        type="burner",
+        fuel_categories = {"lihop-solid-fuel"},
         effectivity = 2,
         fuel_inventory_size = 1,
-        emissions_per_minute = 10,
+        emissions_per_minute = {pollution=10},
         smoke =
         {
           {
@@ -145,16 +146,3 @@ data:extend(
       }
     }
   })
-
-
-  if mods["space-exploration"] then
-    data.raw["recipe"]["lihop-infinity-generator"].ingredients =
-    {
-      { "lihop-infinity-stone", 100 },
-      { "se-antimatter-reactor",      4 },
-      { "steam-turbine",        50 },
-      { "steel-plate",        1000 },
-      { "se-nanomaterial",        100 },
-
-    }
-  end

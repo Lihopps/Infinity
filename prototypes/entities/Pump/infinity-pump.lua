@@ -70,13 +70,13 @@ data:extend(
     energy_required = 2,
     ingredients =
     {
-      {"pump", 10},
-      {"lihop-infinity-stone", 10},
-      {"steel-plate", 100},
-      {"low-density-structure", 20}
+      { type="item",name="pump", amount=10},
+      { type="item",name="lihop-infinity-stone", amount=10},
+      { type="item",name="steel-plate",amount= 100},
+      { type="item",name="low-density-structure",amount= 20}
     
     },
-    result = "lihop-infinity-pump"
+    results ={ { type="item",name="lihop-infinity-pump",amount=1}}
   },
 {
     type = "item",
@@ -113,20 +113,18 @@ data:extend(
         production_type = "output",
         pipe_picture = assembler2pipepictures(),
         pipe_covers = pipecoverspictures(),
-        base_area = 1,
-        base_level = 8,
-		height=10,
-        pipe_connections = {{ type="output", position = {0, 2} }},
+        volume = 1000,
+        pipe_connections = {{ flow_direction="output", direction = defines.direction.south, position = {0, 1.0} }},
         secondary_draw_orders = { north = -1 }
       }
     },
     collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
     selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
     damaged_trigger_effect = hit_effects.entity(),
-    animation =
+    graphics_set={animation =
     {
       layers =layers
-    },
+    }},
     open_sound = sounds.machine_open,
     close_sound = sounds.machine_close,
     vehicle_impact_sound = sounds.generic_impact,
@@ -149,7 +147,7 @@ data:extend(
     {
       type = "electric",
       usage_priority = "secondary-input",
-      emissions_per_minute = 12	
+      emissions_per_minute = {pollution=12}
     },
     energy_usage = "1000kW",
     module_specification =
@@ -160,13 +158,3 @@ data:extend(
   }
  })
 
- if mods["space-exploration"] then
-  data.raw["recipe"]["lihop-infinity-pump"].ingredients =
-   {
-      {"se-heat-shielding", 100},
-      {"pump", 20},
-      {"low-density-structure", 20},
-      {"se-heavy-girder", 5},
-      {"lihop-infinity-stone", 5}
-    }
-end
