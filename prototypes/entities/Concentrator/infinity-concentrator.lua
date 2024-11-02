@@ -26,7 +26,8 @@ data:extend({
     subgroup = "production-machine",
     order = "d[concentrator]",
     place_result = "lihop-concentrator",
-    stack_size = 50
+    stack_size = 50,
+    weight = 50 * kg
   },
   {
     type = "assembling-machine",
@@ -121,6 +122,8 @@ data:extend({
     },
     energy_usage = "400kW",
     module_slots = 4,
-    allowed_effects = { "consumption", "speed", "productivity", "pollution" }
+    allowed_effects = { "consumption", "speed", "productivity", "pollution" },
+    circuit_wire_max_distance = assembling_machine_circuit_wire_max_distance,
+    circuit_connector = circuit_connector_definitions["assembling-machine"],
   }
 })

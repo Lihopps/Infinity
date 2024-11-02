@@ -2,6 +2,7 @@ data:extend({
 {
     type = "generator-equipment",
     name = "lihop-fusion-reactor-equipment",
+    take_result="lihop-fusion-reactor-equipment",
     sprite =
     {
       filename = "__Infinity__/graphics/equipments/fusion-reactor-eq.png",

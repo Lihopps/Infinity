@@ -15,10 +15,14 @@ local function on_entity_build(e)
 		return
 	end
 	local entity_name = entity.name
-	if entity.name == "lihop-infinity-miner-fake" or entity.name == "lihop-infinity-miner" then
-		lihop_inf_miner.definerecipesolid(entity, constructeur)
-	elseif entity.name == "lihop-infinity-pump-jack" or entity.name == "lihop-infinity-pump-jack-fake" then
-		lihop_inf_miner.definerecipefluid(entity, constructeur)
+	if entity.name == "lihop-infinity-miner-fake"  then
+		lihop_inf_miner.create_and_definerecipesolid(entity, constructeur)
+	elseif entity.name == "lihop-infinity-miner"  then
+		lihop_inf_miner.definerecipesolid(entity)
+	elseif entity.name == "lihop-infinity-pump-jack-fake" then
+		lihop_inf_miner.create_and_definerecipefluid(entity, constructeur)
+	elseif entity.name == "lihop-infinity-pump-jack" then
+		lihop_inf_miner.definerecipefluid(entity)
 	elseif entity.name == "lihop-teleporteur" then
 		if not storage.lihop_buildings[entity.force.name] then storage.lihop_buildings[entity.force.name] = {} end
 		if not storage.lihop_buildings[entity.force.name][entity.surface.name] then storage.lihop_buildings[entity.force.name][entity.surface.name] = {} end

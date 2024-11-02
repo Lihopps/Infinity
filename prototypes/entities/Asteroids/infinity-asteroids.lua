@@ -24,7 +24,7 @@ local shared_resistances =
     percent = {0, 20, 90, 95, 99}
   }
 }
-local shared_health = {0, 100, 400, 2000, 5000}
+local shared_health = {0, 50, 150, 1000, 5000}
 local shared_mass = {0, 200000, 500000, 5000000, 100000000}
 local asteroid_sizes = {"chunk", "small", "medium", "big", "huge"}
 local asteroids_data =

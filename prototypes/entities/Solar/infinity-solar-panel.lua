@@ -4,7 +4,7 @@ local sounds = require("__base__/prototypes/entity/sounds")
 if mods["space-exploration"] then
   prod= "2MW"
 else
-  prod="600kW"
+  prod="100kW"
 end
 
 data:extend({
@@ -16,7 +16,8 @@ data:extend({
     subgroup="energy",
     order="d[solar-panel]-b[infinity-solar-panel]",
     place_result = "lihop-infinity-solar-panel",
-    stack_size = 50
+    stack_size = 50,
+    weight = 20 * kg
   },
   {
     type = "recipe",
@@ -27,7 +28,7 @@ data:extend({
     ingredients =
     {
       { type="item",name="solar-panel", amount=10},
-      { type="item",name="lihop-infinity-stone", amount=10},
+      { type="item",name="lihop-infinity-stone", amount=5},
       { type="item",name="steel-plate", amount=100},
       { type="item",name="low-density-structure", amount=20}
     

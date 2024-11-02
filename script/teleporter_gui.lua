@@ -39,7 +39,7 @@ end
 local function on_gui_closed(e)
     local player = game.get_player(e.player_index)
     if not player then return end
-    if player.opened then
+    if player.opened and player.opened.prototype.type~="equipment-grid" then
         if player.opened.name == "lihop_tel_frame" then
             local refs = player.opened
             if not refs then return end

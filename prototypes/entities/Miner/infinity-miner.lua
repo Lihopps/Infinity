@@ -60,24 +60,24 @@ data:extend(
       energy_required = 2,
       ingredients =
       {
-        {  type="item",name="electric-mining-drill", amount=10 },
-        {  type="item",name="lihop-infinity-stone", amount= 10 },
-        {  type="item",name="steel-plate",         amount=  100 },
-        {  type="item",name="low-density-structure",amount= 20 }
+        { type = "item", name = "big-mining-drill",  amount = 5 },
+        { type = "item", name = "lihop-infinity-stone", amount = 5 },
+        { type = "item", name = "steel-plate",       amount = 100 },
+        { type = "item", name = "low-density-structure", amount = 20 }
 
       },
-      results = {{ type="item",name="lihop-infinity-miner",amount=1}}
+      results = { { type = "item", name = "lihop-infinity-miner", amount = 1 } }
     },
     {
       type = "item",
       name = "lihop-infinity-miner",
       icon = "__Infinity__/graphics/entities/miner/miner.png",
       icon_size = 64,
-      icon_mipmaps = 4,
       subgroup = "extraction-machine",
       order = "a[items]-c[infinity-miner]",
       place_result = "lihop-infinity-miner-fake",
-      stack_size = 50
+      stack_size = 20,
+      weight = 50 * kg
     },
     ---- The real entity, placed by script
     {
@@ -85,16 +85,15 @@ data:extend(
       name = "lihop-infinity-miner",
       icon = "__Infinity__/graphics/entities/miner/miner.png",
       icon_size = 64,
-      icon_mipmaps = 4,
       flags = { "placeable-neutral", "placeable-player", "player-creation" },
       minable = { mining_time = 0.2, result = "lihop-infinity-miner" },
       max_health = 350,
       corpse = "medium-remnants",
       dying_explosion = "medium-explosion",
-      se_allow_in_space = true,
       alert_icon_shift = util.by_pixel(-3, -12),
       recipe_locked = true,
       placeable_by = { item = "lihop-infinity-miner", count = 1 },
+      vector_to_place_result = { 0, 1.95 },
       resistances =
       {
         {
@@ -109,27 +108,21 @@ data:extend(
           production_type = "input",
           pipe_picture = assembler2pipepictures(),
           pipe_covers = pipecoverspictures(),
-          volume=1000,
-          pipe_connections = { { flow_direction="input", direction = defines.direction.north, position = { 0, -1. } } },
+          volume = 1000,
+          pipe_connections = { { flow_direction = "input", direction = defines.direction.north, position = { 0, -1. } } },
           secondary_draw_orders = { north = -1 }
         },
-        {
-          production_type = "output",
-          pipe_picture = assembler2pipepictures(),
-          pipe_covers = pipecoverspictures(),
-          volume=1000,
-          pipe_connections = { { flow_direction="output", direction = defines.direction.south, position = { 0, 1. } } },
-          secondary_draw_orders = { north = -1 }
-        },
-        
+
       },
       collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
       selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
       damaged_trigger_effect = hit_effects.entity(),
-      graphics_set={animation =
-      {
-        layers = layers
-      }},
+      graphics_set = {
+        animation =
+        {
+          layers = layers
+        }
+      },
       open_sound = sounds.machine_open,
       close_sound = sounds.machine_close,
       vehicle_impact_sound = sounds.generic_impact,
@@ -152,14 +145,11 @@ data:extend(
       {
         type = "electric",
         usage_priority = "secondary-input",
-        emissions_per_minute = {pollution=12}
+        emissions_per_minute = { pollution = 12 }
       },
       energy_usage = "200kW",
-      module_specification =
-      {
-        module_slots = 0
-      },
-      allowed_effects = {}
+      module_slots = 4,
+      allowed_effects = { "speed", "productivity", "consumption", "pollution", "quality" }
     },
 
     ---- False entity juste use to force placement on resource fields
@@ -168,8 +158,10 @@ data:extend(
       name = "lihop-infinity-miner-fake",
       icon = "__Infinity__/graphics/entities/miner/miner.png",
       icon_size = 64,
-      icon_mipmaps = 4,
       flags = { "placeable-neutral", "player-creation" },
+      hidden=true,
+      hidden_in_factoriopedia=true,
+      hide_from_signal_gui=true,
       resource_categories = lihop.minertype,
       minable = { mining_time = 0.3, result = "lihop-infinity-miner" },
       max_health = 150,
@@ -179,7 +171,7 @@ data:extend(
       selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
       --damaged_trigger_effect = hit_effects.entity(),
       mining_speed = lihop.settings.oreAmount / 2,
-      vector_to_place_result = { 0, 0 },
+      vector_to_place_result = { 0, 2 },
       input_fluid_box =
       {
         production_type = "input-output",
@@ -191,7 +183,8 @@ data:extend(
           { flow_direction="input-output", direction = defines.direction.north, position = { 0, -1.199 } }
         }
       },
-      allowed_effects = {},
+      module_slots = 4,
+      allowed_effects = {"speed", "productivity", "consumption", "pollution", "quality"},
       energy_source =
       {
         type = "electric",
@@ -224,5 +217,3 @@ data:extend(
       resource_drain_rate_percent=1
     }
   })
-
-

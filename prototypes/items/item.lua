@@ -67,25 +67,14 @@ data:extend(
       name = "lihop-fusion-reactor-equipment",
       icon = "__Infinity__/graphics/items/fusion-reactor.png",
       icon_size = 64,
-      icon_mipmaps = 4,
       placed_as_equipment_result = "lihop-fusion-reactor-equipment",
       subgroup="equipment",
       order="a[energy-source]-c[infinity-fusion-reactor]",
-      stack_size = 5,
+      stack_size = 1,
+      weight = 1 * tons
     },
+    
   })
----- create false item for button
-data:extend({
-  {
-    type = "item",
-    name = "lihop-false-item",
-    icon = "__Infinity__/graphics/items/lihop-false-item.png",
-    icon_size = 64,
-    flags = {"hide-from-bonus-gui"},
-    icon_mipmaps = 4,
-    stack_size = 1
-  }
-})
 
 data:extend({
   {
