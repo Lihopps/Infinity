@@ -121,7 +121,7 @@ data:extend(
 			ingredients =
 			{
 				{ type = "item", name = "pumpjack",          amount = 10 },
-				{ type = "item", name = "lihop-infinity-stone", amount = 10 },
+				{ type = "item", name = "lihop-infinity-stone", amount = 5 },
 				{ type = "item", name = "steel-plate",       amount = 100 },
 				{ type = "item", name = "low-density-structure", amount = 20 }
 
@@ -137,7 +137,8 @@ data:extend(
 			subgroup = "extraction-machine",
 			order = "b[fluids]-c[infinity-pumpjack]",
 			place_result = "lihop-infinity-pump-jack-fake",
-			stack_size = 20
+			stack_size = 20,
+			weight = 50 * kg
 		},
 
 		---- The real entity, placed by script
@@ -157,12 +158,8 @@ data:extend(
 			selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
 			damaged_trigger_effect = hit_effects.entity(),
 			drawing_box = { { -1.5, -1.9 }, { 1.5, 1.5 } },
-			module_specification =
-			{
-				module_slots = 0
-			},
-			allowed_effects = {},
-
+			module_slots = 2,
+      		allowed_effects = {"speed", "productivity", "consumption", "pollution"},
 			graphics_set={animation =
 			{
 				north = Cnorth,
@@ -237,6 +234,9 @@ data:extend(
 			icon_size = 64,
 			icon_mipmaps = 4,
 			flags = { "placeable-neutral", "player-creation" },
+			hidden=true,
+    		hidden_in_factoriopedia=true,
+        	hide_from_signal_gui=true,
 			minable = { mining_time = 0.5, result = "lihop-infinity-pump-jack" },
 			resource_categories = lihop.pumptype,
 			max_health = 200,
@@ -245,6 +245,8 @@ data:extend(
 			collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
 			selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
 			drawing_box = { { -1.6, -2.5 }, { 1.5, 1.6 } },
+			module_slots = 2,
+      		allowed_effects = {"speed", "productivity", "consumption", "pollution"},
 			energy_source =
 			{
 				type = "electric",
@@ -255,7 +257,7 @@ data:extend(
 			{
 				pipe_covers = pipecoverspictures(),
 				volume = 1000,
-				pipe_connections = { { flow_direction = "output", direction = defines.direction.north, position = { 0, -1.119 } } },
+				pipe_connections = { { flow_direction = "output", direction = defines.direction.south, position = { 0, 1.119 } } },
 			},
 			energy_usage = "90kW",
 			mining_speed = lihop.settings.oreAmount / 2,

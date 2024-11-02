@@ -111,7 +111,7 @@ data:extend(
     {
       type = "recipe",
       name = "lihop-infinity-stone",
-      energy_required = 30,
+      energy_required = 10,
       enabled = false,
       category = "lihop-concentrating",
       icon = "__Infinity__/graphics/items/infinity-stone.png",
@@ -120,32 +120,33 @@ data:extend(
       subgroup = "raw-resource",
       ingredients =
       {
-        { type = "item", name = "lihop-raw-infinity-stone", amount = 10 },
+        { type = "item", name = "lihop-raw-infinity-stone", amount = 5 },
         { type = "item", name = "uranium-235",              amount = 10 },
       },
       results =
       {
-        { type = "item", name = "lihop-infinity-stone", amount = 1 },
+        { type = "item", name = "lihop-infinity-stone", amount = 4 },
         { type = "item", name = "uranium-235",          amount = 9 },
       },
     },
      {
     type = "recipe",
     name = "infinity-asteroid-crushing",
-    icon = "__space-age__/graphics/icons/metallic-asteroid-crushing.png",
+    icon = "__Infinity__/graphics/icons/infinity-asteroid-crushing.png",
     category = "crushing",
     subgroup="space-crushing",
     order = "b-a",
     auto_recycle = false,
-    enabled = false,
+    enabled = true,
     ingredients =
     {
       {type = "item", name = "infinity-asteroid-chunk", amount = 1},
     },
-    energy_required = 2,
+    energy_required = 0.5,
     results =
     {
-      {type = "item", name = "lihop-raw-infinity-stone", amount = 1,probability=0.5},
+      {type = "item", name = "lihop-raw-infinity-stone", amount = 1,probability=0.85},
+       {type = "item", name = "infinity-asteroid-chunk", amount = 1,probability=0.15},
     },
     allow_productivity = true,
     allow_decomposition = false

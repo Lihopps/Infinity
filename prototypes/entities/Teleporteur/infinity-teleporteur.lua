@@ -23,18 +23,17 @@ data:extend({
     name = "lihop-teleporteur",
     icon = "__Infinity__/graphics/entities/teleporteur/teleporter-icon.png",
     icon_size = 64,
-    icon_mipmaps = 4,
     subgroup = "defensive-structure",
     order = "d[radar]-b[teleporter]",
     place_result = "lihop-teleporteur",
-    stack_size = 50
+    stack_size = 1,
+    weight = 1000 * kg
   },
   {
     type = "electric-energy-interface",
     name = "lihop-teleporteur",
     icon = "__Infinity__/graphics/entities/teleporteur/teleporter-icon.png",
     icon_size = 64,
-    icon_mipmaps = 4,
     flags = { "placeable-neutral", "placeable-player", "player-creation", "not-rotatable" },
     max_health = 1000,
     minable = { mining_time = 1, result = "lihop-teleporteur" },
@@ -107,6 +106,60 @@ data:extend({
   },
 })
 
+local ing1={}
+local ing2={}
+
+if mods["space-age"] then
+  ing1={
+				{"automation-science-pack", 1},
+				{"logistic-science-pack", 1},
+				{"chemical-science-pack", 1},
+				{"production-science-pack", 1},
+				{"utility-science-pack", 1},
+				{"military-science-pack",1},
+				{"space-science-pack", 1},
+        {"metallurgic-science-pack",1},
+        {"electromagnetic-science-pack",1},
+        {"agricultural-science-pack",1},
+        {"cryogenic-science-pack",1},
+			}
+  ing2={
+       {"automation-science-pack", 1},
+				{"logistic-science-pack", 1},
+				{"chemical-science-pack", 1},
+				{"production-science-pack", 1},
+				{"utility-science-pack", 1},
+				{"military-science-pack",1},
+				{"space-science-pack", 1},
+        {"metallurgic-science-pack",1},
+        {"electromagnetic-science-pack",1},
+        {"agricultural-science-pack",1},
+        {"cryogenic-science-pack",1},
+        {"promethium-science-pack",1},
+      }
+else
+  ing1={
+				{"automation-science-pack", 1},
+				{"logistic-science-pack", 1},
+				{"chemical-science-pack", 1},
+				{"production-science-pack", 1},
+				{"utility-science-pack", 1},
+				{"military-science-pack",1},
+				{"space-science-pack", 1},
+			}
+  ing2={
+       {"automation-science-pack", 1},
+				{"logistic-science-pack", 1},
+				{"chemical-science-pack", 1},
+				{"production-science-pack", 1},
+				{"utility-science-pack", 1},
+				{"military-science-pack",1},
+				{"space-science-pack", 1},
+      }
+end
+
+
+
   data:extend({ 
      {
     type = "technology",
@@ -124,20 +177,7 @@ data:extend({
     unit =
     {
       count = 4000,
-      ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"logistic-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"production-science-pack", 1},
-				{"utility-science-pack", 1},
-				{"military-science-pack",1},
-				{"space-science-pack", 1},
-        {"metallurgic-science-pack",1},
-        {"electromagnetic-science-pack",1},
-        {"agricultural-science-pack",1},
-        {"cryogenic-science-pack",1},
-			},
+      ingredients =ing1,
 			time = 60
     },
     prerequisites = { "lihop-infinity-stone" }
@@ -160,21 +200,7 @@ data:extend({
     unit =
     {
       count = 4000,
-      ingredients =
-      {
-       {"automation-science-pack", 1},
-				{"logistic-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"production-science-pack", 1},
-				{"utility-science-pack", 1},
-				{"military-science-pack",1},
-				{"space-science-pack", 1},
-        {"metallurgic-science-pack",1},
-        {"electromagnetic-science-pack",1},
-        {"agricultural-science-pack",1},
-        {"cryogenic-science-pack",1},
-        {"promethium-science-pack",1},
-      },
+      ingredients =ing2,
       time = 60
     },
     prerequisites = { "lihop-infinity-pre-teleportation","lihop-infinity-energy2" }

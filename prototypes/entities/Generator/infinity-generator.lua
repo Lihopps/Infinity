@@ -80,7 +80,8 @@ data:extend(
       subgroup="energy",
       order="f[nuclear-energy]-e[infinity-generator]",
       place_result = "lihop-infinity-generator",
-      stack_size = 50
+      stack_size = 1,
+      weight = 1000*kg
     },
     {
       type = "burner-generator",

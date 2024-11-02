@@ -60,8 +60,8 @@ data:extend(
     energy_required = 2,
     ingredients =
     {
-      { type="item",name="pump", amount=10},
-      { type="item",name="lihop-infinity-stone", amount=10},
+      { type="item",name="pump", amount=5},
+      { type="item",name="lihop-infinity-stone", amount=5},
       { type="item",name="steel-plate",amount= 100},
       { type="item",name="low-density-structure",amount= 20}
     
@@ -76,7 +76,8 @@ data:extend(
     subgroup="extraction-machine",
     order="b[fluids]-aa[infinity-pump]",
 	  place_result = "lihop-infinity-pump",
-    stack_size = 50
+    stack_size = 20,
+    weight = 50 * kg
   },
   {type = "assembling-machine",
     name = "lihop-infinity-pump",
@@ -139,11 +140,8 @@ data:extend(
       emissions_per_minute = {pollution=12}
     },
     energy_usage = "1000kW",
-    module_specification =
-    {
-      module_slots = 0
-    },
-    allowed_effects = {}
+    module_slots = 2,
+    allowed_effects = {"speed", "productivity", "consumption", "pollution"}
   }
  })
 

@@ -1,3 +1,9 @@
+local util=require("script.util")
+
+-------------------------------------------------------------------------------------------------------------------------
+------------------------------------------ FUNCTIONS -------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+
 function Set(list)
     local set = {}
     for _, l in ipairs(list) do set[l] = true end
@@ -14,10 +20,13 @@ local function recipe_result(resource, input_fluid, output_fluid)
     local recipe = {
         type = "recipe",
         name = "lihop-" .. resource.name,
-        enabled = false,
+        enabled = true,
         energy_required = 2,
         ingredients = {},
-        results = {}
+        results = {},
+        hidden=true,
+        hidden_in_factoriopedia=true,
+        hide_from_signal_gui=true
     }
     if (input_fluid) then
         recipe.ingredients = { { type = "fluid", name = resource.minable.required_fluid, amount = resource.minable.fluid_amount } }
@@ -105,6 +114,19 @@ local function recipe_result(resource, input_fluid, output_fluid)
     return recipe
 end
 
+function insertRecipe(name)
+    table.insert(data.raw["technology"]["mining-productivity-3"].effects,changeRecipe(name))
+end
+
+function changeRecipe(name)
+    return {
+        type = "change-recipe-productivity",
+        recipe = "lihop-" .. name,
+        change = 0.1,
+        hidden=true
+      }
+
+end
 
 -------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------ ORES AND MOST OF MODDED ORES -------------------------------------------------
@@ -115,26 +137,43 @@ local fluid = Set(lihop.pumptype)
 for k, v in pairs(data.raw.resource) do
     if solid[data.raw.resource[k].category] or data.raw.resource[k].category == nil then
         if data.raw.resource[k].minable.required_fluid ~= nil then
-            data:extend({
-                recipe_result(data.raw.resource[k], true, false)
-            })
+            data:extend({recipe_result(data.raw.resource[k], true, false)})
+            insertRecipe(data.raw.resource[k].name)
         else
-            data:extend({
-                recipe_result(data.raw.resource[k], false, false)
-            })
+            data:extend({recipe_result(data.raw.resource[k], false, false)})
+            insertRecipe(data.raw.resource[k].name)
         end
     elseif fluid[data.raw.resource[k].category] then
         if data.raw.resource[k].minable.required_fluid ~= nil then
-            data:extend({
-                recipe_result(data.raw.resource[k], true, true)
-            })
+            data:extend({recipe_result(data.raw.resource[k], true, true)})
+            insertRecipe(data.raw.resource[k].name)
         else
-            data:extend({
-                recipe_result(data.raw.resource[k], false, true)
-            })
+            data:extend({recipe_result(data.raw.resource[k], false, true)})
+            insertRecipe(data.raw.resource[k].name)
         end
     end
 end
+
+local custom_nothing_miner =
+    {
+        type="nothing",
+        effect_description="un super effect",
+        icon = "__Infinity__/graphics/entities/miner/miner.png",
+        icon_size = 64,
+        use_icon_overlay_constant=true
+    }
+
+local custom_nothing_pump =
+    {
+        type="nothing",
+        effect_description="un super effect de pump",
+        icon = "__Infinity__/graphics/entities/pumpjack/pumpicons.png",
+        icon_size = 64,
+        use_icon_overlay_constant=true
+    }
+
+table.insert(data.raw["technology"]["mining-productivity-3"].effects,custom_nothing_miner)
+table.insert(data.raw["technology"]["mining-productivity-3"].effects,custom_nothing_pump)
 
 -------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------ Fluids Recipe From tile -------------------------------------------------
@@ -148,11 +187,40 @@ for k, v in pairs(data.raw.tile) do
                 name = "lihop-infinity-pump-"..v.fluid,
                 category = "lihop-excavate-fluid-tile",
                 enabled = true,
-                energy_required = 1,
+                energy_required = 0.5,
                 ingredients = {},
+                hidden=true,
+                hide_from_signal_gui=true,
+                hidden_in_factoriopedia=true,
                 results = { { type = "fluid", name = v.fluid, amount = 500 } }
             },
         }
     )
     end
+end
+
+-------------------------------------------------------------------------------------------------------------------------
+------------------------------------------ spawn chunk asteroids -------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+for k,v in pairs(data.raw["space-connection"]) do 
+    local spawn_asteroids=v.asteroid_spawn_definitions
+    for i,spawn_ast in pairs(spawn_asteroids) do
+        local sp=nil
+        if spawn_ast.type=="asteroid-chunk" then
+            if util.split(spawn_ast.asteroid, "-")[1]=="metallic" then
+               sp=table.deepcopy(spawn_ast) 
+            end
+        else
+            if util.split(spawn_ast.asteroid, "-")[2]=="metallic" then
+                sp=table.deepcopy(spawn_ast) 
+            end
+        end
+        if sp then
+            local name=sp.asteroid:gsub("metallic","infinity",1)
+            sp.asteroid=name
+            table.insert(v.asteroid_spawn_definitions,sp)
+        end
+    end
+    --log(serpent.block(v.asteroid_spawn_definitions))
+    
 end

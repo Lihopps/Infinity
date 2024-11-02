@@ -36,7 +36,7 @@ data:extend({
     name = "lihop-infinity-water-steam",
     category = "lihop-boiler",
     ingredients = { { type = "fluid", name = "water", amount = 100 } },
-    results = { { type = "fluid", name = "steam", amount = 100, temperature = 500 } }
+    results = { { type = "fluid", name = "steam", amount = 100, temperature = 500 } },
   },
   {
     type = "recipe",
@@ -60,7 +60,8 @@ data:extend({
     subgroup = "energy",
     order = "b[steam-power]-a[infinity-boiler]",
     place_result = "lihop-boiler",
-    stack_size = 50
+    stack_size = 50,
+    weight = 50 * kg
   },
   {
     type = "assembling-machine",
