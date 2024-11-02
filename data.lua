@@ -71,11 +71,9 @@ end
 
 -----TODO 
 --[[
-description de la pump
 infinity-asteroid-crushing =enable false
-infinity ore a deplacer avec les autres ore
 Fusion reactor a changer la tech et il marche pasd
 essayer de mettre fleche sur miner
-stack size du fuel train 
+
 
 ]]

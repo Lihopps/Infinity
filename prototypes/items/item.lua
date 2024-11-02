@@ -18,7 +18,9 @@ data:extend(
       { size = 64, filename = "__Infinity__/graphics/items/raw-4.png", scale = 0.25, mipmap_count = 4 }
     },
       icon_size = 64,icon_mipmaps = 4,
-      stack_size = 50
+      stack_size = 50,
+      subgroup="raw-resource",
+      order="g[uranium-ore]-[infinity-stone]",
     },
     ---- Infinity stone
     {
@@ -59,7 +61,8 @@ data:extend(
       fuel_glow_color = { r = 1, g = 0.1, b = 0.1 },
       subgroup="intermediate-product",
       order="s[infinity-stone-fuel]",
-      stack_size = 1
+      stack_size = 1,
+      weight = 10*kg
     },
     ---- Fusion Reactor
     {

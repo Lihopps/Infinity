@@ -37,6 +37,8 @@ data:extend({
     category = "lihop-boiler",
     ingredients = { { type = "fluid", name = "water", amount = 100 } },
     results = { { type = "fluid", name = "steam", amount = 100, temperature = 500 } },
+    subgroup="fluid-recipes",
+    order="d[other-chemistry]-d[water-to-steam]"
   },
   {
     type = "recipe",
