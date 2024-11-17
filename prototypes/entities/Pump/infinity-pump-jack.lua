@@ -234,7 +234,7 @@ data:extend(
 			icon_size = 64,
 			icon_mipmaps = 4,
 			flags = { "placeable-neutral", "player-creation" },
-			hidden=true,
+			--hidden=true,
     		hidden_in_factoriopedia=true,
         	hide_from_signal_gui=true,
 			minable = { mining_time = 0.5, result = "lihop-infinity-pump-jack" },

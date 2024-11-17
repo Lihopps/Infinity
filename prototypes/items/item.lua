@@ -70,7 +70,7 @@ data:extend(
       name = "lihop-fusion-reactor-equipment",
       icon = "__Infinity__/graphics/items/fusion-reactor.png",
       icon_size = 64,
-      placed_as_equipment_result = "lihop-fusion-reactor-equipment",
+      place_as_equipment_result = "lihop-fusion-reactor-equipment",
       subgroup="equipment",
       order="a[energy-source]-c[infinity-fusion-reactor]",
       stack_size = 1,

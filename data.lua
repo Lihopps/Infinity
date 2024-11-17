@@ -31,6 +31,7 @@ require("prototypes.style")
 if mods["space-age"] then
 	require("prototypes.technologies.technologies")
 	require("prototypes.entities.Asteroids.infinity-asteroids")
+	require("prototypes.entities.Heater.heater")
 end
 
 if mods["Krastorio2"] then
@@ -71,9 +72,9 @@ end
 
 -----TODO 
 --[[
+Heater entity,recipe,item/description/graphics
 infinity-asteroid-crushing =enable false
-Fusion reactor a changer la tech et il marche pasd
-essayer de mettre fleche sur miner
-
-
+add my crushing to the infinity research
+ajout du infinity ore comme le promethium
+infinity machine heat
 ]]

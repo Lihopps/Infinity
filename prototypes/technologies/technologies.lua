@@ -111,7 +111,15 @@ data:extend({
 			{
 			type = "unlock-recipe",
 			recipe = "lihop-infinity-generator"
-			}
+			},
+			{
+			type = "unlock-recipe",
+			recipe = "lihop-fusion-reactor-equipment"
+			},
+			{
+			type = "unlock-recipe",
+			recipe = "lihop-infinity-heater"
+			},
 		},
 		unit =
 		{
@@ -139,10 +147,6 @@ data:extend({
 			{
 			type = "unlock-recipe",
 			recipe = "lihop-infinity-fuel"
-			},
-			{
-			type = "unlock-recipe",
-			recipe = "lihop-fusion-reactor-equipment"
 			},
 			{
 			type = "unlock-recipe",

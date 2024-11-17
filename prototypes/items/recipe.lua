@@ -50,8 +50,9 @@ data:extend(
       category = "lihop-concentrating",
       ingredients =
       {
-        { type = "item", name = "fusion-reactor-equipment", amount = 4 },
-        { type = "item", name = "lihop-infinity-stone", amount = 25 }
+        { type = "item", name = "fusion-reactor-equipment", amount = 1 },
+        { type = "item", name = "lihop-infinity-stone", amount = 100 },
+        { type = "item", name = "fusion-power-cell", amount = 20 }
       },
       results = { { type = "item", name = "lihop-fusion-reactor-equipment", amount = 1 } }
 

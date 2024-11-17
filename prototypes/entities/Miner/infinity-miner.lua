@@ -159,7 +159,7 @@ data:extend(
       icon = "__Infinity__/graphics/entities/miner/miner.png",
       icon_size = 64,
       flags = { "placeable-neutral", "player-creation" },
-      hidden=true,
+      -- hidden=true,
       hidden_in_factoriopedia=true,
       hide_from_signal_gui=true,
       resource_categories = lihop.minertype,
