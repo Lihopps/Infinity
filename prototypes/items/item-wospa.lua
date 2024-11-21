@@ -23,3 +23,7 @@ data:extend({{
         results = {{type="item",name="lihop-satellite-miner",amount=1}}
       }})
 data.raw["item"]["lihop-raw-infinity-stone"].stack_size=1000
+data.raw["recipe"]["lihop-fusion-reactor-equipment"].ingredients = {
+        { type = "item", name = "fusion-reactor-equipment", amount = 1 },
+        { type = "item", name = "lihop-infinity-stone", amount = 100 },
+      }

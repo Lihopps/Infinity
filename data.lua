@@ -31,7 +31,7 @@ require("prototypes.style")
 if mods["space-age"] then
 	require("prototypes.technologies.technologies")
 	require("prototypes.entities.Asteroids.infinity-asteroids")
-	require("prototypes.entities.Heater.heater")
+	--require("prototypes.entities.Heater.heater")
 end
 
 if mods["Krastorio2"] then

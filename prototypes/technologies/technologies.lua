@@ -116,10 +116,10 @@ data:extend({
 			type = "unlock-recipe",
 			recipe = "lihop-fusion-reactor-equipment"
 			},
-			{
-			type = "unlock-recipe",
-			recipe = "lihop-infinity-heater"
-			},
+			-- {
+			-- type = "unlock-recipe",
+			-- recipe = "lihop-infinity-heater"
+			-- },
 		},
 		unit =
 		{

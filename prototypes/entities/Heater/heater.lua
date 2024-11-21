@@ -51,43 +51,53 @@ data:extend(
             selection_box = { { -2.5, -2.5 }, { 2.5, 2.5 } },
             damaged_trigger_effect = hit_effects.entity(),
             lower_layer_picture =
-    {
-      filename = "__base__/graphics/entity/nuclear-reactor/reactor-pipes.png",
-      width = 320,
-      height = 316,
-      scale = 0.5,
-      shift = util.by_pixel(-1, -5)
-    },
-    heat_lower_layer_picture = apply_heat_pipe_glow
-    {
-      filename = "__base__/graphics/entity/nuclear-reactor/reactor-pipes-heated.png",
-      width = 320,
-      height = 316,
-      scale = 0.5,
-      shift = util.by_pixel(-0.5, -4.5)
-    },
+            {
+                filename = "__base__/graphics/entity/nuclear-reactor/reactor-pipes.png",
+                width = 320,
+                height = 316,
+                scale = 0.5,
+                shift = util.by_pixel(-1, -5)
+            },
+            heat_lower_layer_picture = apply_heat_pipe_glow
+                {
+                    filename = "__base__/graphics/entity/nuclear-reactor/reactor-pipes-heated.png",
+                    width = 320,
+                    height = 316,
+                    scale = 0.5,
+                    shift = util.by_pixel(-0.5, -4.5)
+                },
+            working_light_picture =
+            {
+                filename = "__base__/graphics/entity/nuclear-reactor/reactor-lights-color.png",
+                blend_mode = "additive",
+                draw_as_glow = true,
+                width = 320,
+                height = 320,
+                scale = 0.5,
+                shift = { -0.03125, -0.1875 },
+            },
 
-    picture =
-    {
-      layers =
-      {
-        {
-          filename = "__base__/graphics/entity/nuclear-reactor/reactor.png",
-          width = 302,
-          height = 318,
-          scale = 0.5,
-          shift = util.by_pixel(-5, -7)
-        },
-        {
-          filename = "__base__/graphics/entity/nuclear-reactor/reactor-shadow.png",
-          width = 525,
-          height = 323,
-          scale = 0.5,
-          shift = { 1.625, 0 },
-          draw_as_shadow = true
-        }
-      }
-    },
+            picture =
+            {
+                layers =
+                {
+                    {
+                        filename = "__base__/graphics/entity/nuclear-reactor/reactor.png",
+                        width = 302,
+                        height = 318,
+                        scale = 0.5,
+                        shift = util.by_pixel(-5, -7)
+                    },
+                    {
+                        filename = "__base__/graphics/entity/nuclear-reactor/reactor-shadow.png",
+                        width = 525,
+                        height = 323,
+                        scale = 0.5,
+                        shift = { 1.625, 0 },
+                        draw_as_shadow = true
+                    }
+                }
+            },
             working_sound =
             {
                 sound =
@@ -154,17 +164,18 @@ data:extend(
             energy_source =
             {
                 type = "fluid",
-                fluid_usage_per_tick = 1, --1 per second
+                --fluid_usage_per_tick = 1, --1 per second
+                scale_energy_usage = false,
                 fluid_box =
                 {
                     volume = 15,
                     production_type = "input-output",
                     pipe_connections =
                     {
-                        { flow_direction = "input-output", direction = defines.direction.south, position = { 0, 2 }, connection_category = { "fusion-plasma" } },
-                        { flow_direction = "input-output", direction = defines.direction.north, position = { 0, -2 },  connection_category = { "fusion-plasma" } },
-                        { flow_direction = "input-output", direction = defines.direction.west, position = { -2, 0 }, connection_category = { "fusion-plasma" } },
-                        { flow_direction = "input-output", direction = defines.direction.east, position = { 2, 0 },  connection_category = { "fusion-plasma" } },
+                        { flow_direction = "input-output", direction = defines.direction.south, position = { 0, 2 },  connection_category = { "fusion-plasma" } },
+                        { flow_direction = "input-output", direction = defines.direction.north, position = { 0, -2 }, connection_category = { "fusion-plasma" } },
+                        { flow_direction = "input-output", direction = defines.direction.west,  position = { -2, 0 }, connection_category = { "fusion-plasma" } },
+                        { flow_direction = "input-output", direction = defines.direction.east,  position = { 2, 0 },  connection_category = { "fusion-plasma" } },
                     },
                     filter = "fusion-plasma"
                 }

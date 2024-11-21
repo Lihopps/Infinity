@@ -55,7 +55,6 @@ data:extend(
         { type = "item", name = "fusion-power-cell", amount = 20 }
       },
       results = { { type = "item", name = "lihop-fusion-reactor-equipment", amount = 1 } }
-
     },
     {
       type = "recipe",
@@ -130,26 +129,4 @@ data:extend(
         { type = "item", name = "uranium-235",          amount = 9 },
       },
     },
-     {
-    type = "recipe",
-    name = "infinity-asteroid-crushing",
-    icon = "__Infinity__/graphics/icons/infinity-asteroid-crushing.png",
-    category = "crushing",
-    subgroup="space-crushing",
-    order = "b-a",
-    auto_recycle = false,
-    enabled = true,
-    ingredients =
-    {
-      {type = "item", name = "infinity-asteroid-chunk", amount = 1},
-    },
-    energy_required = 0.5,
-    results =
-    {
-      {type = "item", name = "lihop-raw-infinity-stone", amount = 1,probability=0.85},
-       {type = "item", name = "infinity-asteroid-chunk", amount = 1,probability=0.15},
-    },
-    allow_productivity = true,
-    allow_decomposition = false
-  },
   })
