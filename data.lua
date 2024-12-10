@@ -72,9 +72,11 @@ end
 
 -----TODO 
 --[[
-Heater entity,recipe,item/description/graphics
-infinity-asteroid-crushing =enable false
-add my crushing to the infinity research
-ajout du infinity ore comme le promethium
+voir pour mettre dans factorio pedia les info pas des fake
 infinity machine heat
+ajout du infinity ore comme le promethium
+infinity-asteroid-crushing =enable false
+add my crushing to the infinity research + recalcule si recherche deja faite ?
+
+(Heater entity,recipe,item/description/graphics)
 ]]

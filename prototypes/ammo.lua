@@ -43,7 +43,8 @@ data:extend(
     magazine_size = 10,
     subgroup="ammo",
     order="a[basic-clips]-d[infinity-round-magazine]",
-    stack_size = 200
+    stack_size = 100,
+    weight = 40*kg
   },
   
 	{
@@ -110,7 +111,8 @@ data:extend(
     },
     subgroup="ammo",
     order="d[explosive-canon-shell]-ca[cannon-shell]",
-    stack_size = 200
+    stack_size = 100,
+    weight = 40*kg
   },
   {
     type = "ammo",
@@ -144,6 +146,7 @@ data:extend(
     },
     subgroup="ammo",
     order="d[explosive-canon-shell]-ca[-explosive-cannon-shell]",
-    stack_size = 200
+    stack_size = 100,
+    weight = 40*kg
   }
  })
