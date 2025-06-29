@@ -1,14 +1,14 @@
 {
     "name": "Infinity",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "title": "Infinity",
     "author": "lihop",
     "contact": "lihops.game@gmail.com",
-    "homepage": "",
+    "homepage": "https://github.com/Lihopps/Infinity",
     "factorio_version": "2.0",
     "dependencies": [
 	"base >=2.0.0",
-    "(?) space-age>=2.0.0",
+    "? space-age>=2.0.0",
     "flib >=0.15.0"],
     "description": "This mod adds a way to have infinity ore and fluids"
 }
