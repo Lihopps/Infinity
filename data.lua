@@ -7,7 +7,7 @@ lihop.settings.oreAmount = settings.startup["lihop-infinity-oreamount"].value
 lihop.settings.fluidAmount = settings.startup["lihop-infinity-fluidamount"].value
 lihop.settings.forcetel = settings.startup["lihop-infinity-force-tel"].value
 
-lihop.minertype={"basic-solid","hard-solid"}
+lihop.minertype={"basic-solid"}
 lihop.pumptype={"basic-fluid"}
 
 -------------------------------------------------------------------------------------------------------------------------
@@ -31,12 +31,12 @@ require("prototypes.style")
 if mods["space-age"] then
 	require("prototypes.technologies.technologies")
 	require("prototypes.entities.Asteroids.infinity-asteroids")
-	--require("prototypes.entities.Heater.heater")
+	table.insert(lihop.minertype,"hard-solid")
 end
 
 if mods["Krastorio2"] then
 	lihop.settings.Krastorioquarry = settings.startup["lihop-infinity-Krastorioquarry"].value
-	table.insert(lihop.pumptype, "oil")
+	--table.insert(lihop.pumptype, "oil")
 	if lihop.settings.Krastorioquarry then
 		table.insert(lihop.minertype, "kr-quarry")
 	end
@@ -69,14 +69,13 @@ if not mods["space-exploration"] then
 end
 
 
-
 -----TODO 
 --[[
-voir pour mettre dans factorio pedia les info pas des fake
-infinity machine heat
-ajout du infinity ore comme le promethium
+description de la pump
 infinity-asteroid-crushing =enable false
-add my crushing to the infinity research + recalcule si recherche deja faite ?
+infinity ore a deplacer avec les autres ore
+Fusion reactor a changer la tech et il marche pasd
+essayer de mettre fleche sur miner
+stack size du fuel train 
 
-(Heater entity,recipe,item/description/graphics)
 ]]

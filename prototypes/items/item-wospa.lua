@@ -1,10 +1,11 @@
-data:extend({{
+data.extend({{
         type = "item",
         name = "lihop-satellite-miner",
         icon = "__Infinity__/graphics/items/satmining.png",
         icon_size = 64,
         stack_size = 1,
-        rocket_launch_product = {{type="item",name= "lihop-raw-infinity-stone", amount=1000 }},
+        send_to_orbit_mode="automated",
+        rocket_launch_products = {{type="item",name= "lihop-raw-infinity-stone", amount=1000 }},
         subgroup="space-related",
         order="n[satellite-miner]",
       },
@@ -23,7 +24,3 @@ data:extend({{
         results = {{type="item",name="lihop-satellite-miner",amount=1}}
       }})
 data.raw["item"]["lihop-raw-infinity-stone"].stack_size=1000
-data.raw["recipe"]["lihop-fusion-reactor-equipment"].ingredients = {
-        { type = "item", name = "fusion-reactor-equipment", amount = 1 },
-        { type = "item", name = "lihop-infinity-stone", amount = 100 },
-      }

@@ -1,9 +1,9 @@
-local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
+
 local item_tints = require("__base__.prototypes.item-tints")
 ------------------------------------------------------------------------
 --------------------------------------- ITEM ---------------------------
 ------------------------------------------------------------------------
-data:extend(
+data.extend(
   {
     ---- Raw Infinity stone
     {
@@ -18,9 +18,7 @@ data:extend(
       { size = 64, filename = "__Infinity__/graphics/items/raw-4.png", scale = 0.25, mipmap_count = 4 }
     },
       icon_size = 64,icon_mipmaps = 4,
-      stack_size = 50,
-      subgroup="raw-resource",
-      order="g[uranium-ore]-[infinity-stone]",
+      stack_size = 50
     },
     ---- Infinity stone
     {
@@ -44,7 +42,7 @@ data:extend(
       subgroup="intermediate-product",
       order="s[infinity-stone-cell]",
       fuel_category = "lihop-solid-fuel",
-      fuel_value = "16GJ",
+      fuel_value = "64GJ",
       stack_size = 50
     },
     ----- Infinity Fuel
@@ -61,8 +59,7 @@ data:extend(
       fuel_glow_color = { r = 1, g = 0.1, b = 0.1 },
       subgroup="intermediate-product",
       order="s[infinity-stone-fuel]",
-      stack_size = 1,
-      weight = 10*kg
+      stack_size = 1
     },
     ---- Fusion Reactor
     {
@@ -78,8 +75,9 @@ data:extend(
     },
     
   })
-
-data:extend({
+if mods["space-age"] then
+local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
+data.extend({
   {
     type = "item",
     name = "infinity-asteroid-chunk",
@@ -93,4 +91,27 @@ data:extend({
     weight = 100 * kg,
     random_tint_color = item_tints.iron_rust
   },
+    {
+    type = "recipe",
+    name = "infinity-asteroid-crushing",
+    icon = "__Infinity__/graphics/icons/infinity-asteroid-crushing.png",
+    category = "crushing",
+    subgroup="space-crushing",
+    order = "b-a",
+    auto_recycle = false,
+    enabled = true,
+    ingredients =
+    {
+      {type = "item", name = "infinity-asteroid-chunk", amount = 1},
+    },
+    energy_required = 0.5,
+    results =
+    {
+      {type = "item", name = "lihop-raw-infinity-stone", amount = 1,probability=0.85},
+       {type = "item", name = "infinity-asteroid-chunk", amount = 1,probability=0.15},
+    },
+    allow_productivity = true,
+    allow_decomposition = false
+  },
 })
+end

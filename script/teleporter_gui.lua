@@ -39,12 +39,14 @@ end
 local function on_gui_closed(e)
     local player = game.get_player(e.player_index)
     if not player then return end
-    if player.opened and player.opened.prototype.type~="equipment-grid" then
-        if player.opened.name == "lihop_tel_frame" then
-            local refs = player.opened
-            if not refs then return end
-            refs.destroy()
-            player.opened = nil
+    if player.opened then
+        if player.opened_gui_type==defines.gui_type.entity then
+            if player.opened.name == "lihop_tel_frame" then
+                local refs = player.opened
+                if not refs then return end
+                refs.destroy()
+                player.opened = nil
+            end
         end
     elseif not e.entity then
         if not e.element then return end
@@ -79,7 +81,7 @@ local function on_teleportation_clicked(e)
         if #players_to_tel > 0 then
             for _, character in pairs(players_to_tel) do
                 if character.player and character.player.valid then
-                    character.player.teleport(ent.position, ent.surface)
+                    character.player.teleport({ent.position.x,ent.position.y+0.5}, ent.surface)
                 end
             end
         else
@@ -266,16 +268,16 @@ local function create_gui(entity, player)
                             style_mods = { vertically_stretchable = true, horizontally_squashable = true },
                             {
                                 type = "frame",
-                                style_mods = { vertically_stretchable = true,  },
+                                --style_mods = { vertically_stretchable = true,  },
                                 visible = player.force.technologies["lihop-infinity-teleportation"].researched,
                                 {
                                     type = "frame",
-                                    style_mods = { vertically_stretchable = true },
+                                    --style_mods = { vertically_stretchable = true },
                                     style = "deep_frame_in_shallow_frame",
                                     {
                                         type = "scroll-pane",
                                         style = "inf_list_box_scroll_pane",
-                                        style_mods = { vertically_stretchable = true, },
+                                        --style_mods = { vertically_stretchable = true, },
                                         name = "frame_surface",
                                     }
                                 },

@@ -1,6 +1,5 @@
 local util=require("script.util")
 
-local probability_divisor=5
 -------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------ FUNCTIONS -------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
@@ -155,6 +154,27 @@ for k, v in pairs(data.raw.resource) do
     end
 end
 
+local custom_nothing_miner =
+    {
+        type="nothing",
+        effect_description="un super effect",
+        icon = "__Infinity__/graphics/entities/miner/miner.png",
+        icon_size = 64,
+        use_icon_overlay_constant=true
+    }
+
+local custom_nothing_pump =
+    {
+        type="nothing",
+        effect_description="un super effect de pump",
+        icon = "__Infinity__/graphics/entities/pumpjack/pumpicons.png",
+        icon_size = 64,
+        use_icon_overlay_constant=true
+    }
+
+table.insert(data.raw["technology"]["mining-productivity-3"].effects,custom_nothing_miner)
+table.insert(data.raw["technology"]["mining-productivity-3"].effects,custom_nothing_pump)
+
 -------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------ Fluids Recipe From tile -------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
@@ -167,7 +187,6 @@ for k, v in pairs(data.raw.tile) do
                 name = "lihop-infinity-pump-"..v.fluid,
                 category = "lihop-excavate-fluid-tile",
                 enabled = true,
-                localised_name = v.fluid,
                 energy_required = 0.5,
                 ingredients = {},
                 hidden=true,
@@ -183,24 +202,18 @@ end
 -------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------ spawn chunk asteroids -------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
-for k,v in pairs(data.raw["space-connection"]) do
-    if (v.from=="nauvis" or v.to=="nauvis") or (v.from=="shattered_planet_trip" or v.to=="shattered_planet_trip") then
+if mods["space-age"] then
+    for k,v in pairs(data.raw["space-connection"]) do 
         local spawn_asteroids=v.asteroid_spawn_definitions
         for i,spawn_ast in pairs(spawn_asteroids) do
             local sp=nil
             if spawn_ast.type=="asteroid-chunk" then
                 if util.split(spawn_ast.asteroid, "-")[1]=="metallic" then
-                    sp=table.deepcopy(spawn_ast)
-                    for _,v in pairs(sp.spawn_points) do
-                        v.probability=v.probability/probability_divisor
-                    end
+                sp=table.deepcopy(spawn_ast) 
                 end
             else
                 if util.split(spawn_ast.asteroid, "-")[2]=="metallic" then
-                    sp=table.deepcopy(spawn_ast)
-                    for _,v in pairs(sp.spawn_points) do
-                        v.probability=v.probability/probability_divisor
-                    end
+                    sp=table.deepcopy(spawn_ast) 
                 end
             end
             if sp then
@@ -210,5 +223,20 @@ for k,v in pairs(data.raw["space-connection"]) do
             end
         end
         --log(serpent.block(v.asteroid_spawn_definitions))
+        
     end
+else
+    data.raw.recipe["lihop-fusion-reactor-equipment"].ingredients =
+      {
+        { type = "item", name = "fission-reactor-equipment", amount = 4 },
+        { type = "item", name = "lihop-infinity-stone", amount = 25 }
+      }
+    data.raw.recipe["lihop-infinity-miner"].ingredients =
+      {
+        { type = "item", name = "electric-mining-drill",  amount = 5 },
+        { type = "item", name = "lihop-infinity-stone", amount = 5 },
+        { type = "item", name = "steel-plate",       amount = 100 },
+        { type = "item", name = "low-density-structure", amount = 20 }
+
+      }
 end

@@ -1,15 +1,9 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.1.1
-Date: 2024-11-24
-  Changes:
-    - add some description
-    - change stack size and weight for ammo
----------------------------------------------------------------------------------------------------
 Version: 1.1.0
-Date: 2024-11-17
+Date: 2024-11-21
   Changes:
-    - Change teleporter GUI
-    - Update to Factorio 2.0
+    - Change telepoorter GUI
+    - Preparation for Factorio 2.0
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 09. 09. 2024

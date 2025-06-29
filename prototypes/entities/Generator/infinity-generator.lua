@@ -98,7 +98,7 @@ data:extend(
       collision_box = { { -4.40, -4.40 }, { 4.40, 4.40 } },
       selection_box = { { -4.5, -4.5 }, { 4.5, 4.5 } },
       damaged_trigger_effect = hit_effects.entity(),
-      max_power_output = "1.5GW",
+      max_power_output = "3GW",
       animation =
       {
         north = layersV,
