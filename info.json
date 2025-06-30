@@ -10,5 +10,9 @@
 	"base >=2.0.0",
     "? space-age>=2.0.0",
     "flib >=0.15.0"],
-    "description": "This mod adds a way to have infinity ore and fluids"
+    "description": "This mod adds a way to have infinity ore and fluids",
+    "package": {
+        "no_portal_upload": true,
+        "git_publish_branch": "main"
+    }
 }
