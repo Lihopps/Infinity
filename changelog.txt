@@ -1,4 +1,18 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.2
+Date: 2025-06-30
+  Changes:
+    - Change telepoorter GUI
+    - finalizing transition to Factorio 2.0
+    - fixe direction of pump that is not conserved
+    - fixe some localised name
+---------------------------------------------------------------------------------------------------
+Version: 1.1.1
+Date: 2024-06-29
+  Changes:
+    - Change telepoorter GUI
+    - Preparation for Factorio 2.0
+---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 2024-11-21
   Changes:
