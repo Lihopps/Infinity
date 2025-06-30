@@ -44,8 +44,8 @@ function lihop_inf_miner.create_and_definerecipesolid(ent,player)
 	local pos=ent.position
 	local dir=ent.direction
 	local surf=ent.surface
-	local entity =surf.create_entity{name="lihop-infinity-miner",position=pos,force=player.force.name}
-	entity.direction=dir
+	local entity =surf.create_entity{name="lihop-infinity-miner",position=pos,force=player.force.name,direction=dir}
+	--entity.direction=dir
 	ent.destroy()
 	lihop_inf_miner.definerecipesolid(entity)
 
@@ -54,7 +54,7 @@ end
 
 
 ---- Define recipe for fluid pump
-function lihop_inf_miner.definerecipefluid(entity)
+function lihop_inf_miner.definerecipefluid(entity,direction)
 	entity.recipe_locked=true
 	entity.set_recipe()
     local a=entity.surface.find_entities_filtered{area = entity.bounding_box , type = "resource"}
@@ -69,6 +69,7 @@ function lihop_inf_miner.definerecipefluid(entity)
 		local name="lihop-".. b[i].name
 		try(function()
 			entity.set_recipe(name)
+			entity.direction=direction
 		end, function(e)
 			entity.surface.print(b[i].name .." not supported")
 		end)
@@ -79,9 +80,9 @@ function lihop_inf_miner.create_and_definerecipefluid(ent,player)
 	local pos=ent.position
 	local dir=ent.direction
 	local surf=ent.surface
-	ent.destroy()
 	local entity =surf.create_entity{name="lihop-infinity-pump-jack",position=pos,force=player.force.name,direction=dir}
-	lihop_inf_miner.definerecipefluid(entity)
+	ent.destroy()
+	lihop_inf_miner.definerecipefluid(entity,dir)
 end
 
 function lihop_inf_miner.definerecipefluidfromtile(entity)

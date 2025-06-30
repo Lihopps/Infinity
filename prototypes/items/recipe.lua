@@ -37,7 +37,6 @@ data:extend(
       ingredients = { { type = "item", name = "nuclear-fuel", amount = 1 }, { type = "item", name = "lihop-infinity-stone", amount = 2 } },
       icon = "__Infinity__/graphics/items/infinity-fuel.png",
       icon_size = 64,
-      icon_mipmaps = 4,
       results = { { type = "item", name = "lihop-infinity-fuel", amount = 1 } }
     },
 
@@ -115,9 +114,8 @@ data:extend(
       enabled = false,
       category = "lihop-concentrating",
       icon = "__Infinity__/graphics/items/infinity-stone.png",
+      hidden_in_factoriopedia=true,
       icon_size = 64,
-      icon_mipmaps = 4,
-      subgroup = "raw-resource",
       ingredients =
       {
         { type = "item", name = "lihop-raw-infinity-stone", amount = 5 },

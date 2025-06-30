@@ -39,6 +39,7 @@ data:extend({
     minable = { mining_time = 1, result = "lihop-teleporteur" },
     corpse = "medium-remnants",
     dying_explosion = "medium-explosion",
+    gui_mode="all",
     damaged_trigger_effect = hit_effects.entity(),
     collision_mask={layers={ item=true, object=true, water_tile=true}},
     collision_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
@@ -165,7 +166,6 @@ end
     type = "technology",
     name = "lihop-infinity-pre-teleportation",
     icon_size = 256,
-    icon_mipmaps = 4,
     icon = "__Infinity__/graphics/technologies/teleportation.png",
     effects =
     {
@@ -186,7 +186,6 @@ end
     type = "technology",
     name = "lihop-infinity-teleportation",
     icon_size = 256,
-    icon_mipmaps = 4,
     icon = "__Infinity__/graphics/technologies/teleportation.png",
     effects =
     {
@@ -194,7 +193,6 @@ end
         type = "nothing",
         icon = "__Infinity__/graphics/technologies/teleportation.png",
         icon_size = 256,
-        icon_mipmaps = 4,
       }
     },
     unit =

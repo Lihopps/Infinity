@@ -40,7 +40,7 @@ local function on_gui_closed(e)
     local player = game.get_player(e.player_index)
     if not player then return end
     if player.opened then
-        if player.opened_gui_type==defines.gui_type.entity then
+        if player.opened_gui_type==defines.gui_type.entity or player.opened_gui_type==16 then
             if player.opened.name == "lihop_tel_frame" then
                 local refs = player.opened
                 if not refs then return end
@@ -99,6 +99,7 @@ local function update_list_teleport(refs, entity, player, surface_name)
     local list_teleport = refs.table_teleporter
     local teleport = {}
     list_teleport.clear()
+    refs.frame_minimap.visible=true
     refs.surface_name_label.caption = surface_name
     if not storage.lihop_buildings[player.force.name] then return end
     if not storage.lihop_buildings[player.force.name][surface_name] then return end
@@ -137,6 +138,7 @@ local function update_list_teleport(refs, entity, player, surface_name)
             end
         end
     end
+    if not next(teleport) then refs.frame_minimap.visible=false end
     gui.add(list_teleport, teleport)
 end
 
@@ -277,7 +279,7 @@ local function create_gui(entity, player)
                                     {
                                         type = "scroll-pane",
                                         style = "inf_list_box_scroll_pane",
-                                        --style_mods = { vertically_stretchable = true, },
+                                        style_mods = { width=200,horizontally_stretchable = true,height=500 },
                                         name = "frame_surface",
                                     }
                                 },

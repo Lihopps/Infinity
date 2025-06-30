@@ -12,17 +12,6 @@ local layers =
     line_length = 4,
     shift = util.by_pixel(0, -15),
     scale = 0.7,
-    hr_version =
-    {
-      filename = "__Infinity__/graphics/entities/miner/minerf.png",
-      priority = "high",
-      width = 126,
-      height = 173,
-      frame_count = 32,
-      line_length = 4,
-      shift = util.by_pixel(0, -15),
-      scale = 0.7
-    }
   },
   {
     filename = "__Infinity__/graphics/entities/miner/minerf-shadow.png",
@@ -34,18 +23,6 @@ local layers =
     draw_as_shadow = true,
     shift = util.by_pixel(40, -15),
     scale = 0.7,
-    hr_version =
-    {
-      filename = "__Infinity__/graphics/entities/miner/minerf-shadow.png",
-      priority = "high",
-      width = 240,
-      height = 174,
-      frame_count = 32,
-      line_length = 4,
-      draw_as_shadow = true,
-      shift = util.by_pixel(40, -15),
-      scale = 0.7
-    }
   }
 }
 
@@ -88,10 +65,11 @@ data:extend(
       flags = { "placeable-neutral", "placeable-player", "player-creation" },
       minable = { mining_time = 0.2, result = "lihop-infinity-miner" },
       max_health = 350,
+      hidden=true,
+      hidden_in_factoriopedia=true,
       corpse = "medium-remnants",
       dying_explosion = "medium-explosion",
       alert_icon_shift = util.by_pixel(-3, -12),
-      recipe_locked = true,
       placeable_by = { item = "lihop-infinity-miner", count = 1 },
       vector_to_place_result = { 0, 1.95 },
       resistances =
@@ -135,7 +113,6 @@ data:extend(
             volume = 0.45
           }
         },
-        audible_distance_modifier = 0.5,
         fade_in_ticks = 4,
         fade_out_ticks = 20
       },
@@ -159,7 +136,7 @@ data:extend(
       icon = "__Infinity__/graphics/entities/miner/miner.png",
       icon_size = 64,
       flags = { "placeable-neutral", "player-creation" },
-      hidden=true,
+      --hidden=true,
       hidden_in_factoriopedia=true,
       hide_from_signal_gui=true,
       resource_categories = lihop.minertype,

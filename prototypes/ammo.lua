@@ -8,11 +8,10 @@ data:extend(
     type = "ammo",
     name = "lihop-infinity-rounds-magazine",
     icon = "__Infinity__/graphics/items/infinity-rounds-magazine.png",
-    icon_size = 64, icon_mipmaps = 4,
+    icon_size = 64,
     ammo_category="bullet",
     ammo_type =
     {
-      category = "bullet",
       action =
       {
         type = "direct",
@@ -50,14 +49,13 @@ data:extend(
     type = "ammo",
     name = "lihop-infinity-bomb",
     icon = "__Infinity__/graphics/items/infinity-bomb.png",
-    icon_size = 64, icon_mipmaps = 4,
-    ammo_category="bullet",
+    icon_size = 64,
+    ammo_category="rocket",
     ammo_type =
     {
       range_modifier = 5,
       cooldown_modifier = 5,
       target_type = "position",
-      category = "rocket",
       action =
       {
         type = "direct",
@@ -82,11 +80,10 @@ data:extend(
     type = "ammo",
     name = "lihop-infinity-cannon-shell",
     icon = "__Infinity__/graphics/items/infinity-cannon-shell.png",
-    icon_size = 64, icon_mipmaps = 4,
-    ammo_category="bullet",
+    icon_size = 64, 
+    ammo_category="cannon-shell",
     ammo_type =
     {
-      category = "cannon-shell",
       target_type = "direction",
       action =
       {
@@ -116,11 +113,10 @@ data:extend(
     type = "ammo",
     name = "lihop-explosive-infinity-cannon-shell",
     icon = "__Infinity__/graphics/items/explosive-infinity-cannon-shell.png",
-    icon_size = 64, icon_mipmaps = 4,
-    ammo_category="bullet",
+    icon_size = 64, 
+    ammo_category="cannon-shell",
     ammo_type =
     {
-      category = "cannon-shell",
       target_type = "direction",
       action =
       {

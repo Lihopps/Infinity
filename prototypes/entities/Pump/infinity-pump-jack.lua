@@ -133,7 +133,6 @@ data:extend(
 			name = "lihop-infinity-pump-jack",
 			icon = "__Infinity__/graphics/entities/pumpjack/pumpicons.png",
 			icon_size = 64,
-			icon_mipmaps = 4,
 			subgroup = "extraction-machine",
 			order = "b[fluids]-c[infinity-pumpjack]",
 			place_result = "lihop-infinity-pump-jack-fake",
@@ -147,17 +146,17 @@ data:extend(
 			name = "lihop-infinity-pump-jack",
 			icon = "__Infinity__/graphics/entities/pumpjack/pumpicons.png",
 			icon_size = 64,
-			icon_mipmaps = 4,
 			flags = { "placeable-neutral", "placeable-player", "player-creation" },
 			minable = { mining_time = 0.1, result = "lihop-infinity-pump-jack" },
 			max_health = 300,
+			hidden=true,
+    		hidden_in_factoriopedia=true,
 			placeable_by = { item = "lihop-infinity-pump-jack", count = 1 },
 			corpse = "medium-remnants",
 			dying_explosion = "medium-explosion",
 			collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
 			selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
 			damaged_trigger_effect = hit_effects.entity(),
-			drawing_box = { { -1.5, -1.9 }, { 1.5, 1.5 } },
 			module_slots = 2,
       		allowed_effects = {"speed", "productivity", "consumption", "pollution"},
 			graphics_set={animation =
@@ -190,11 +189,9 @@ data:extend(
 				},
 				--max_sounds_per_type = 3,
 				--idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.3 },
-				apparent_volume = 1.5,
 				fade_in_ticks = 4,
 				fade_out_ticks = 20
 			},
-			supports_direction = true,
 			crafting_speed = 1,
 			energy_source =
 			{
@@ -212,7 +209,7 @@ data:extend(
 					pipe_covers = pipecoverspictures(),
 					--pipe_picture = assembler2pipepictures(),
 					volume = 1000,
-					pipe_connections = { { flow_direction = "input", direction = defines.direction.south, position = { 0, 1.199 } } },
+					pipe_connections = { { flow_direction = "input", direction = defines.direction.south, position = { 0, 1 } } },
 					secondary_draw_orders = { north = -1 }
 				},
 				{
@@ -220,7 +217,7 @@ data:extend(
 					pipe_covers = pipecoverspictures(),
 					--pipe_picture = assembler2pipepictures(),
 					volume = 1000,
-					pipe_connections = { { flow_direction = "output", direction = defines.direction.north, position = { 0, -1.199 } } },
+					pipe_connections = { { flow_direction = "output", direction = defines.direction.north, position = { 0, -1} } },
 					secondary_draw_orders = { north = -1 }
 				},
 			}
@@ -232,9 +229,8 @@ data:extend(
 			name = "lihop-infinity-pump-jack-fake",
 			icon = "__Infinity__/graphics/entities/pumpjack/pumpicons.png",
 			icon_size = 64,
-			icon_mipmaps = 4,
 			flags = { "placeable-neutral", "player-creation" },
-			hidden=true,
+			--hidden=true,
     		hidden_in_factoriopedia=true,
         	hide_from_signal_gui=true,
 			minable = { mining_time = 0.5, result = "lihop-infinity-pump-jack" },
@@ -244,7 +240,6 @@ data:extend(
 			dying_explosion = "big-explosion",
 			collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
 			selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
-			drawing_box = { { -1.6, -2.5 }, { 1.5, 1.6 } },
 			module_slots = 2,
       		allowed_effects = {"speed", "productivity", "consumption", "pollution"},
 			energy_source =
@@ -257,7 +252,7 @@ data:extend(
 			{
 				pipe_covers = pipecoverspictures(),
 				volume = 1000,
-				pipe_connections = { { flow_direction = "output", direction = defines.direction.south, position = { 0, 1.119 } } },
+				pipe_connections = { { flow_direction = "output", direction = defines.direction.north, position = { 0, -1} } },
 			},
 			energy_usage = "90kW",
 			mining_speed = lihop.settings.oreAmount / 2,

@@ -56,7 +56,6 @@ data:extend({
     name = "lihop-boiler",
     icon = "__Infinity__/graphics/entities/boiler/boiler-icon.png",
     icon_size = 64,
-    icon_mipmaps = 4,
     subgroup = "energy",
     order = "b[steam-power]-a[infinity-boiler]",
     place_result = "lihop-boiler",
@@ -68,7 +67,6 @@ data:extend({
     name = "lihop-boiler",
     icon = "__Infinity__/graphics/entities/boiler/boiler-icon.png",
     icon_size = 64,
-    icon_mipmaps = 4,
     flags = { "placeable-neutral", "player-creation" },
     minable = { mining_time = 0.2, result = "lihop-boiler" },
     max_health = 200,
@@ -97,7 +95,6 @@ data:extend({
     collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
     selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
     damaged_trigger_effect = hit_effects.entity(),
-    drawing_box = { { -1.5, -1.9 }, { 1.5, 1.5 } },
     fluid_boxes_off_when_no_fluid_recipe = true,
     fluid_boxes =
     {
@@ -133,7 +130,6 @@ data:extend({
         volume = 0.7
       },
       --max_sounds_per_type = 3,
-      audible_distance_modifier = 0.3,
       fade_in_ticks = 4,
       fade_out_ticks = 20
     },

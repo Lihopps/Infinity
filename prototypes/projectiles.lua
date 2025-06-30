@@ -23,8 +23,6 @@ data:extend({
               offset_deviation = {{-1, -1}, {1, 1}},
               starting_frame = 3,
               starting_frame_deviation = 5,
-              starting_frame_speed = 0,
-              starting_frame_speed_deviation = 5,
               speed_from_center = 0.5
           },
           {

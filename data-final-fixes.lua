@@ -115,6 +115,8 @@ local function recipe_result(resource, input_fluid, output_fluid)
 end
 
 function insertRecipe(name)
+    table.insert(data.raw["technology"]["mining-productivity-1"].effects,changeRecipe(name))
+    table.insert(data.raw["technology"]["mining-productivity-2"].effects,changeRecipe(name))
     table.insert(data.raw["technology"]["mining-productivity-3"].effects,changeRecipe(name))
 end
 
@@ -154,27 +156,6 @@ for k, v in pairs(data.raw.resource) do
     end
 end
 
-local custom_nothing_miner =
-    {
-        type="nothing",
-        effect_description="un super effect",
-        icon = "__Infinity__/graphics/entities/miner/miner.png",
-        icon_size = 64,
-        use_icon_overlay_constant=true
-    }
-
-local custom_nothing_pump =
-    {
-        type="nothing",
-        effect_description="un super effect de pump",
-        icon = "__Infinity__/graphics/entities/pumpjack/pumpicons.png",
-        icon_size = 64,
-        use_icon_overlay_constant=true
-    }
-
-table.insert(data.raw["technology"]["mining-productivity-3"].effects,custom_nothing_miner)
-table.insert(data.raw["technology"]["mining-productivity-3"].effects,custom_nothing_pump)
-
 -------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------ Fluids Recipe From tile -------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
@@ -186,6 +167,7 @@ for k, v in pairs(data.raw.tile) do
                 type = "recipe",
                 name = "lihop-infinity-pump-"..v.fluid,
                 category = "lihop-excavate-fluid-tile",
+                localised_name=data.raw.fluid[v.fluid].localised_name or {"fluid-name."..v.fluid},
                 enabled = true,
                 energy_required = 0.5,
                 ingredients = {},

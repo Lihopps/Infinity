@@ -72,7 +72,7 @@ data:extend(
     type = "item",
     name = "lihop-infinity-pump",
     icon = "__Infinity__/graphics/entities/pump/pumpicons.png",
-    icon_size = 64, icon_mipmaps = 4,
+    icon_size = 64,
     subgroup="extraction-machine",
     order="b[fluids]-aa[infinity-pump]",
 	  place_result = "lihop-infinity-pump",
@@ -82,14 +82,13 @@ data:extend(
   {type = "assembling-machine",
     name = "lihop-infinity-pump",
     icon = "__Infinity__/graphics/entities/pump/pumpicons.png",
-    icon_size = 64, icon_mipmaps = 4,
+    icon_size = 64,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "lihop-infinity-pump"},
     max_health = 350,
     corpse = "medium-remnants",
     dying_explosion = "medium-explosion",
     alert_icon_shift = util.by_pixel(-3, -12),
-	  recipe_locked=true,
     resistances =
     {
       {
@@ -127,7 +126,6 @@ data:extend(
           volume = 0.45
         }
       },
-      audible_distance_modifier = 0.5,
       fade_in_ticks = 4,
       fade_out_ticks = 20
     },
