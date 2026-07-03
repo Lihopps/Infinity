@@ -32,7 +32,7 @@ data:extend(
     {
       type = "recipe",
       name = "lihop-infinity-miner",
-      category = "lihop-concentrating",
+      categories = {"lihop-concentrating"},
       enabled = false,
       energy_required = 2,
       ingredients =
@@ -69,6 +69,7 @@ data:extend(
       hidden_in_factoriopedia=true,
       corpse = "medium-remnants",
       dying_explosion = "medium-explosion",
+      se_allow_in_space = true,
       alert_icon_shift = util.by_pixel(-3, -12),
       placeable_by = { item = "lihop-infinity-miner", count = 1 },
       vector_to_place_result = { 0, 1.95 },
@@ -84,7 +85,7 @@ data:extend(
       {
         {
           production_type = "input",
-          pipe_picture = assembler2pipepictures(),
+          pipe_picture = require("__base__/prototypes/entity/assembler-pictures").assembler2pipepictures,
           pipe_covers = pipecoverspictures(),
           volume = 1000,
           pipe_connections = { { flow_direction = "input", direction = defines.direction.north, position = { 0, -1. } } },
@@ -152,7 +153,7 @@ data:extend(
       input_fluid_box =
       {
         production_type = "input-output",
-        pipe_picture = assembler2pipepictures(),
+        pipe_picture = require("__base__/prototypes/entity/assembler-pictures").assembler2pipepictures,
         pipe_covers = pipecoverspictures(),
         volume=1000,
         pipe_connections =

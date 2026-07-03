@@ -1,10 +1,10 @@
-local migrations = {}
+
 
 -- storage.lihop_buildings.force.surface.teleporter ={}
 -- storage.lihop_buildings.force.surface.access ={unit_}
 -- storage.teleporteur[entity.backer_name]=entity
 
-migrations.versions = {
+local migrations = {
   ["1.0.0"] = function()
     ----migration teleporter
 

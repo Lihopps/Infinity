@@ -14,7 +14,7 @@ data.extend({{
         name = "lihop-satellite-miner",
         energy_required = 20,
         enabled = false,
-        category = "advanced-crafting",
+        categories = {"advanced-crafting"},
         ingredients =
         {
           { type="item",name="satellite",     amount=        1 },

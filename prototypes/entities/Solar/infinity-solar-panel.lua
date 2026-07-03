@@ -23,7 +23,7 @@ data:extend({
     type = "recipe",
     name = "lihop-infinity-solar-panel",
     energy_required = 10,
-    category = "lihop-concentrating",
+    categories = {"lihop-concentrating"},
     enabled = false,
     ingredients =
     {

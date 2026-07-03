@@ -94,7 +94,7 @@ data.extend({
     type = "recipe",
     name = "infinity-asteroid-crushing",
     icon = "__Infinity__/graphics/icons/infinity-asteroid-crushing.png",
-    category = "crushing",
+    categories = {"crushing"},
     subgroup="space-crushing",
     order = "b-a-d",
     auto_recycle = false,
@@ -106,8 +106,8 @@ data.extend({
     energy_required = 0.5,
     results =
     {
-      {type = "item", name = "lihop-raw-infinity-stone", amount = 1,probability=0.85},
-       {type = "item", name = "infinity-asteroid-chunk", amount = 1,probability=0.15},
+      {type = "item", name = "lihop-raw-infinity-stone", amount = 1,independent_probability=0.85},
+       {type = "item", name = "infinity-asteroid-chunk", amount = 1,independent_probability=0.15},
     },
     allow_productivity = true,
     allow_decomposition = false

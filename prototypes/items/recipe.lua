@@ -6,7 +6,7 @@ data:extend(
       name = "lihop-infinity-fuel-cell",
       energy_required = 120,
       enabled = false,
-      category = "chemistry",
+      categories = {"chemistry"},
       ingredients =
       {
         { type = "fluid", name = "sulfuric-acid",        amount = 20 },
@@ -33,7 +33,7 @@ data:extend(
       name = "lihop-infinity-fuel",
       energy_required = 90,
       enabled = false,
-      category = "lihop-concentrating",
+      categories = {"lihop-concentrating"},
       ingredients = { { type = "item", name = "nuclear-fuel", amount = 1 }, { type = "item", name = "lihop-infinity-stone", amount = 2 } },
       icon = "__Infinity__/graphics/items/infinity-fuel.png",
       icon_size = 64,
@@ -46,7 +46,7 @@ data:extend(
       name = "lihop-fusion-reactor-equipment",
       enabled = false,
       energy_required = 10,
-      category = "lihop-concentrating",
+      categories = {"lihop-concentrating"},
       ingredients =
       {
         { type = "item", name = "fusion-reactor-equipment", amount = 4 },
@@ -60,7 +60,7 @@ data:extend(
       name = "lihop-infinity-rounds-magazine",
       enabled = false,
       energy_required = 10,
-      category = "lihop-concentrating",
+      categories = {"lihop-concentrating"},
       ingredients =
       {
         { type = "item", name = "uranium-rounds-magazine", amount = 5 },
@@ -72,7 +72,7 @@ data:extend(
       type = "recipe",
       name = "lihop-infinity-bomb",
       enabled = false,
-      category = "lihop-concentrating",
+      categories = {"lihop-concentrating"},
       energy_required = 50,
       ingredients =
       {
@@ -85,7 +85,7 @@ data:extend(
       type = "recipe",
       name = "lihop-infinity-cannon-shell",
       enabled = false,
-      category = "lihop-concentrating",
+      ccategories = {"lihop-concentrating"},
       energy_required = 12,
       ingredients =
       {
@@ -98,7 +98,7 @@ data:extend(
       type = "recipe",
       name = "lihop-explosive-infinity-cannon-shell",
       enabled = false,
-      category = "lihop-concentrating",
+      categories = {"lihop-concentrating"},
       energy_required = 12,
       ingredients =
       {
@@ -112,10 +112,11 @@ data:extend(
       name = "lihop-infinity-stone",
       energy_required = 10,
       enabled = false,
-      category = "lihop-concentrating",
+      categories = {"lihop-concentrating"},
       icon = "__Infinity__/graphics/items/infinity-stone.png",
-      hidden_in_factoriopedia=true,
       icon_size = 64,
+      subgroup="intermediate-product",
+      order="s[infinity]-a[stone]",
       ingredients =
       {
         { type = "item", name = "lihop-raw-infinity-stone", amount = 5 },
@@ -126,7 +127,5 @@ data:extend(
         { type = "item", name = "lihop-infinity-stone", amount = 4 },
         { type = "item", name = "uranium-235",          amount = 9 },
       },
-    },
-
-   
+    },   
   })

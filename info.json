@@ -5,10 +5,10 @@
     "author": "lihop",
     "contact": "lihops.game@gmail.com",
     "homepage": "https://github.com/Lihopps/Infinity",
-    "factorio_version": "2.0",
+    "factorio_version": "2.1",
     "dependencies": [
-	"base >=2.0.0",
-    "? space-age>=2.0.0",
+	"base >=2.1.0",
+    "? space-age>=2.1.0",
     "flib >=0.15.0"],
     "description": "This mod adds a way to have infinity ore and fluids",
     "package": {

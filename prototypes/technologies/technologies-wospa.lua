@@ -147,10 +147,6 @@ data:extend({
 			type = "unlock-recipe",
 			recipe = "lihop-infinity-solar-panel"
 			},
-			{
-			type = "unlock-recipe",
-			recipe = "lihop-boiler"
-			}
 		},
 		unit =
 		{

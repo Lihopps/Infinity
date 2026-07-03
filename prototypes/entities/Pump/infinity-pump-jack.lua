@@ -115,7 +115,7 @@ data:extend(
 		{
 			type = "recipe",
 			name = "lihop-infinity-pump-jack",
-			category = "lihop-concentrating",
+			categories = {"lihop-concentrating"},
 			enabled = false,
 			energy_required = 2,
 			ingredients =

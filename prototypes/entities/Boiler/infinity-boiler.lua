@@ -34,7 +34,7 @@ data:extend({
   {
     type = "recipe",
     name = "lihop-infinity-water-steam",
-    category = "lihop-boiler",
+    categories = {"lihop-boiler"},
     ingredients = { { type = "fluid", name = "water", amount = 100 } },
     results = { { type = "fluid", name = "steam", amount = 100, temperature = 500 } },
   },
@@ -43,7 +43,7 @@ data:extend({
     name = "lihop-boiler",
     energy_required = 4,
     enabled = false,
-    category = "lihop-concentrating",
+    categories = {"lihop-concentrating"},
     ingredients =
     {
       { type = "item", name = "boiler",               amount = 10 },
@@ -100,7 +100,8 @@ data:extend({
     {
       {
         production_type = "input",
-        pipe_picture = assembler2pipepictures(),
+        pipe_picture = require("__base__/prototypes/entity/assembler-pictures").assembler2pipepictures,
+          
         pipe_covers = pipecoverspictures(),
         volume = 1000,
         pipe_connections = { { flow_direction = "input", direction = defines.direction.north, position = { 0, -1 } } },
@@ -108,7 +109,8 @@ data:extend({
       },
       {
         production_type = "output",
-        pipe_picture = assembler2pipepictures(),
+        pipe_picture = require("__base__/prototypes/entity/assembler-pictures").assembler2pipepictures,
+          
         pipe_covers = pipecoverspictures(),
         volume = 1000,
         pipe_connections = { { flow_direction = "output", direction = defines.direction.south, position = { 0, 1 } } },
@@ -145,3 +147,8 @@ data:extend({
     allowed_effects = {}
   }
 })
+
+table.insert(data.raw["technology"]["lihop-infinity-energy"].effects,	{
+			type = "unlock-recipe",
+			recipe = "lihop-boiler"
+			})
