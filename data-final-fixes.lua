@@ -107,7 +107,7 @@ local function recipe_result(resource, input_fluid, output_fluid)
     recipe["results"] = res
     if icon then recipe["icon"] = icon end
     if iconsize then recipe["icon_size"] = iconsize end
-    if category then recipe["category"] = category end
+    if category then recipe["categories"] = {category} end
     if subgroup then recipe["subgroup"] = subgroup end
     if order then recipe["order"] = order end
 
@@ -166,7 +166,7 @@ for k, v in pairs(data.raw.tile) do
             {
                 type = "recipe",
                 name = "lihop-infinity-pump-"..v.fluid,
-                category = "lihop-excavate-fluid-tile",
+                categories = {"lihop-excavate-fluid-tile"},
                 localised_name=data.raw.fluid[v.fluid].localised_name or {"fluid-name."..v.fluid},
                 enabled = true,
                 energy_required = 0.5,

@@ -5,7 +5,7 @@ data:extend({
   {
     type = "recipe",
     name = "lihop-teleporteur",
-    category = "lihop-concentrating",
+    categories = {"lihop-concentrating"},
     energy_required = 4,
     enabled = false,
     ingredients =

@@ -109,6 +109,12 @@ function lihop_inf_miner.definerecipefluidfromtile(entity)
 		end, function(e)
 			game.print(fluids[i].name .." not supported")
 		end)
+	else
+		try(function()
+			entity.set_recipe("lihop-infinity-pump-water")
+		end, function(e)
+			game.print("No Fluids")
+		end)
 	end
 
 

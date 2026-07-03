@@ -6,7 +6,7 @@ data:extend(
         {
             type = "recipe",
             name = "lihop-infinity-heater",
-            category = "lihop-concentrating",
+            categories = {"lihop-concentrating"},
             enabled = false,
             energy_required = 180,
             ingredients =

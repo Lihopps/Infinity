@@ -1,5 +1,3 @@
-local migration = require("__flib__.migration")
-
 local migrations = require("script.migrations")
 
 
@@ -12,7 +10,13 @@ end
 
 function main.on_configuration_changed(e)
     if not storage.lihop_buildings then storage.lihop_buildings = {} end
-	migration.on_config_changed(e, migrations.versions)
+	
+    for version, migration in pairs(migrations) do
+        if helpers.compare_versions(version, old_version) > 0 then
+            migration()
+        end
+    end
+
 end
 
 main.events={

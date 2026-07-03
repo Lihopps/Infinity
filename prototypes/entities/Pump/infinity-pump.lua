@@ -54,7 +54,7 @@ data:extend(
   {
     type = "recipe",
     name = "lihop-infinity-pump",
-	category = "lihop-concentrating",
+	categories = {"lihop-concentrating"},
  
     enabled = false,
     energy_required = 2,
@@ -100,7 +100,7 @@ data:extend(
     {
       {
         production_type = "output",
-        pipe_picture = assembler2pipepictures(),
+       pipe_picture = require("__base__/prototypes/entity/assembler-pictures").assembler2pipepictures,
         pipe_covers = pipecoverspictures(),
         volume = 1000,
         pipe_connections = {{ flow_direction="output", direction = defines.direction.south, position = {0, 1.0} }},

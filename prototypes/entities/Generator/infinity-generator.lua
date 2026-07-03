@@ -57,7 +57,7 @@ data:extend(
     {
       type = "recipe",
       name = "lihop-infinity-generator",
-      category = "lihop-concentrating",
+      categories = {"lihop-concentrating"},
       enabled = false,
       energy_required = 180,
       ingredients =

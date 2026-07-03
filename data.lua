@@ -48,10 +48,12 @@ if mods["bobores"] then
 
 end
 
-if mods["space-exploration"] then
-	table.insert(lihop.minertype,"hard-resource")
-	se_delivery_cannon_recipes["lihop-raw-infinity-stone"] = {name="lihop-raw-infinity-stone"}
-end
+
+--migrate to data-update
+-- if mods["space-exploration"] then
+-- 	table.insert(lihop.minertype,"hard-resource")
+-- 	se_delivery_cannon_recipes["lihop-raw-infinity-stone"] = {name="lihop-raw-infinity-stone"}
+-- end
 
 -- Si absence du mod
 if not mods["space-age"] then
